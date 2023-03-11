@@ -6,10 +6,32 @@ const Pagination = ({
   indexOfFirstItem,
   indexOfLastItem,
 }) => {
+  const displayRange = 3;
+  let start = 1;
   let pages = [];
 
   for (let i = 1; i <= Math.ceil(totalItem / itemPerPage); i++) {
     pages.push(i);
+  }
+
+  if (currentPage <= Math.ceil(displayRange / 2)) {
+    start = 1;
+  } else if (currentPage > totalItem - Math.floor(displayRange / 2)) {
+    start = totalItem - displayRange + 1;
+  } else {
+    start = currentPage - Math.floor(displayRange / 2);
+  }
+
+  const displayedPages = pages.slice(start - 1, start + displayRange - 1);
+  const isFirstPageIncluded = displayedPages.includes(1);
+  const isLastPageIncluded = displayedPages.includes(totalItem);
+
+  if (!isFirstPageIncluded) {
+    displayedPages.unshift(1);
+  }
+
+  if (!isLastPageIncluded) {
+    displayedPages.push(totalItem);
   }
 
   return (
@@ -37,22 +59,11 @@ const Pagination = ({
               paginate(currentPage === 1 ? currentPage : currentPage - 1)
             }
             href='#'
-            class='block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
-            <span class='sr-only'>Previous</span>
-            <svg
-              class='w-5 h-5'
-              aria-hidden='true'
-              fill='currentColor'
-              viewBox='0 0 20 20'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                fill-rule='evenodd'
-                d='M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z'
-                clip-rule='evenodd'></path>
-            </svg>
+            class='px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+            Previous
           </a>
         </li>
-        {pages.map((page) => (
+        {displayedPages.map((page) => (
           <li key={page}>
             <a
               onClick={() => paginate(page)}
@@ -70,19 +81,8 @@ const Pagination = ({
               )
             }
             href='#'
-            class='block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
-            <span class='sr-only'>Next</span>
-            <svg
-              class='w-5 h-5'
-              aria-hidden='true'
-              fill='currentColor'
-              viewBox='0 0 20 20'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                fill-rule='evenodd'
-                d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z'
-                clip-rule='evenodd'></path>
-            </svg>
+            class='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+            Next
           </a>
         </li>
       </ul>

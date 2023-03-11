@@ -1,4 +1,5 @@
 import Dashboard from '@/components/Dashboard';
+import Sidebar from '@/components/Sidebar';
 import Head from 'next/head';
 
 const Home = () => {

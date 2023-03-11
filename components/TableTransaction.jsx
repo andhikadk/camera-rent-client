@@ -29,32 +29,36 @@ const TableTransaction = () => {
 
   return (
     <div className='relative overflow-x-auto'>
-      <Search />
+      <Pagination
+        totalItem={data.length}
+        itemPerPage={10}
+        paginate={paginate}
+        currentPage={currentPage}
+        indexOfFirstItem={indexOfFirstItem}
+        indexOfLastItem={indexOfLastItem}
+      />
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
           <tr>
-            <th scope='col' className='px-6 py-1 w-1/12'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
               Date
             </th>
-            <th scope='col' className='px-6 py-1 w-1/12'>
-              No Invoice
-            </th>
-            <th scope='col' className='px-6 py-1 w-1/12'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
               Nama
             </th>
-            <th scope='col' className='px-6 py-1 w-3/12'>
+            <th scope='col' className='px-6 py-3 w-4/12'>
               Unit
             </th>
-            <th scope='col' className='px-6 py-1 w-2/12'>
+            <th scope='col' className='px-6 py-3 w-2/12'>
               Pengambilan
             </th>
-            <th scope='col' className='px-6 py-1 w-2/12'>
+            <th scope='col' className='px-6 py-3 w-2/12'>
               Pengembalian
             </th>
-            <th scope='col' className='px-6 py-1 w-2/12'>
+            <th scope='col' className='px-6 py-3 w-2/12'>
               Total Biaya
             </th>
-            <th scope='col' className='px-6 py-1 w-1/12'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
               Status
             </th>
           </tr>
@@ -69,7 +73,6 @@ const TableTransaction = () => {
                 className='px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
                 {d.date_entry.slice(0, 16).replace('T', ' ')}
               </th>
-              <td className='px-6 py-2'>{d.no_invoice}</td>
               <td className='px-6 py-2'>{d.cust_id.name}</td>
               <td className='px-6 py-2'>
                 {d.unit.slice(0, 2).map((u, index) => (
@@ -91,14 +94,6 @@ const TableTransaction = () => {
           ))}
         </tbody>
       </table>
-      <Pagination
-        totalItem={data.length}
-        itemPerPage={10}
-        paginate={paginate}
-        currentPage={currentPage}
-        indexOfFirstItem={indexOfFirstItem}
-        indexOfLastItem={indexOfLastItem}
-      />
     </div>
   );
 };

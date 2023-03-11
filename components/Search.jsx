@@ -2,7 +2,7 @@ import React from 'react';
 
 const Search = () => {
   return (
-    <div class='pb-4 bg-slate-300 dark:bg-gray-900'>
+    <div class='bg-slate-300 dark:bg-gray-900'>
       <label for='table-search' class='sr-only'>
         Search
       </label>
