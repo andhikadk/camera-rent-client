@@ -35,7 +35,7 @@ const Pagination = ({
   }
 
   return (
-    <nav
+    <div
       className='flex items-center justify-between pt-4 mb-4'
       aria-label='Table navigation'>
       <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
@@ -86,7 +86,7 @@ const Pagination = ({
           </a>
         </li>
       </ul>
-    </nav>
+    </div>
   );
 };
 

@@ -1,16 +1,15 @@
 import React from 'react';
+import Head from 'next/head';
 import Layout from '@/components/Layout';
-import TableTransaction from '@/components/TableTransaction';
 
-const transactions = () => {
+const units = () => {
   return (
     <Layout>
       <div className='flex flex-row justify-between'>
-        <h1>Transactions</h1>
+        <h1>Units</h1>
       </div>
-      <TableTransaction />
     </Layout>
   );
 };
 
-export default transactions;
+export default units;

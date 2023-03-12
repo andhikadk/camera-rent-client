@@ -1,16 +1,26 @@
 import React from 'react';
+import Head from 'next/head';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 
 const Layout = ({ children }) => {
   return (
-    <div className='flex'>
-      <Sidebar />
-      <div className='flex-grow md:ml-60'>
-        <Topbar />
-        {children}
+    <>
+      <Head>
+        <title>Omah Visual Kamera</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <div className='flex'>
+        <Sidebar />
+        <div className='flex-grow lg:ml-60'>
+          <Topbar />
+          <div className='mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-6'>
+            {children}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

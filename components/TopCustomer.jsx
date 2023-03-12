@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from '@/utils/axios';
 
-const ListCustomer = () => {
+const TopCustomer = () => {
   const [loyal, setLoyal] = useState(true);
   const [customers, setCustomers] = useState([]);
 
@@ -42,7 +42,7 @@ const ListCustomer = () => {
   };
 
   return (
-    <div className='w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
+    <div className='w-full p-4 bg-white rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
       <div className='flex items-center justify-between mb-4'>
         <h5 className='text-xl font-bold leading-none text-gray-900 dark:text-white'>
           Top Customers
@@ -90,4 +90,4 @@ const ListCustomer = () => {
   );
 };
 
-export default ListCustomer;
+export default TopCustomer;

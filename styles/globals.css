@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-300 dark:bg-gray-900 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900;
+  @apply bg-gray-200 dark:bg-gray-900 scrollbar-thin scrollbar-thumb-slate-50 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-900;
 }
 
 h1 {
   @apply text-3xl font-bold dark:text-slate-100 text-slate-900;
+}
+
+nav {
+  @apply bg-white dark:bg-gray-800;
 }
