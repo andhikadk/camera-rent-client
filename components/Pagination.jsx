@@ -1,8 +1,8 @@
 const Pagination = ({
   totalItem,
-  itemPerPage,
   paginate,
   currentPage,
+  lastPage,
   indexOfFirstItem,
   indexOfLastItem,
 }) => {
@@ -10,7 +10,7 @@ const Pagination = ({
   let start = 1;
   let pages = [];
 
-  for (let i = 1; i <= Math.ceil(totalItem / itemPerPage); i++) {
+  for (let i = 1; i <= lastPage; i++) {
     pages.push(i);
   }
 
@@ -24,14 +24,14 @@ const Pagination = ({
 
   const displayedPages = pages.slice(start - 1, start + displayRange - 1);
   const isFirstPageIncluded = displayedPages.includes(1);
-  const isLastPageIncluded = displayedPages.includes(totalItem);
+  const isLastPageIncluded = displayedPages.includes(lastPage);
 
   if (!isFirstPageIncluded) {
     displayedPages.unshift(1);
   }
 
   if (!isLastPageIncluded) {
-    displayedPages.push(totalItem);
+    displayedPages.push(lastPage);
   }
 
   return (

@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import axios from '../utils/axios';
-import TableTransaction from './TableTransaction';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import React from 'react';
 import Layout from './Layout';
+import ListCustomer from './ListCustomer';
 
 const Dashboard = () => {
   return (
@@ -12,6 +9,7 @@ const Dashboard = () => {
         <div className='flex flex-row justify-between mb-4'>
           <h1>Dashboard</h1>
         </div>
+        <ListCustomer />
       </div>
     </Layout>
   );

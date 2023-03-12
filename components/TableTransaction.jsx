@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
 import Pagination from './Pagination';
-import Search from './Search';
 
 const TableTransaction = () => {
   const [data, setData] = useState([]);
@@ -24,6 +23,7 @@ const TableTransaction = () => {
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const lastPage = Math.ceil(data.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -31,7 +31,7 @@ const TableTransaction = () => {
     <div className='relative overflow-x-auto'>
       <Pagination
         totalItem={data.length}
-        itemPerPage={10}
+        lastPage={lastPage}
         paginate={paginate}
         currentPage={currentPage}
         indexOfFirstItem={indexOfFirstItem}

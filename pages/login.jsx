@@ -10,6 +10,15 @@ const Login = () => {
 
   useEffect(() => {
     refreshToken();
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, []);
 
   const refreshToken = async () => {
@@ -42,7 +51,9 @@ const Login = () => {
 
   return (
     <div className='flex justify-center items-center h-screen'>
-      <form onSubmit={handleSubmit} className='bg-white p-8 rounded-lg w-96'>
+      <form
+        onSubmit={handleSubmit}
+        className='bg-white p-8 rounded-lg w-80 md:w-96'>
         <h2 className='text-2xl font-medium mb-5 text-center'>Login</h2>
         <div className='mb-5'>
           <label className='block text-gray-700 font-bold mb-2' htmlFor='email'>
