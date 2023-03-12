@@ -6,6 +6,7 @@ import { FaSun, FaMoon } from 'react-icons/fa';
 
 const Topbar = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
   const router = useRouter();
 
@@ -57,6 +58,10 @@ const Topbar = () => {
     router.push('/login');
   };
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   const toggleDarkMode = (e) => {
     e.preventDefault();
     setDarkMode(!darkMode);
@@ -80,11 +85,42 @@ const Topbar = () => {
             className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-300'>
             Log out
           </button> */}
-          <div className='flex flex-row items-center gap-2'>
-            <h2 className='text-gray-700 dark:text-gray-300 uppercase font-bold'>
-              {name}
-            </h2>
+          <div className='relative flex flex-row items-center gap-2'>
+            <div
+              className='flex items-center cursor-pointer'
+              onClick={toggleDropdown}>
+              <h2 className='text-gray-700 dark:text-gray-300 uppercase font-bold mr-2'>
+                {name}
+              </h2>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-5 w-5 text-gray-700 dark:text-gray-300'
+                viewBox='0 0 20 20'
+                fill='currentColor'>
+                <path
+                  fillRule='evenodd'
+                  d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </div>
+
+            {isOpen && (
+              <div className='absolute right-0 mt-36 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10'>
+                <a
+                  href='#'
+                  className='block px-4 py-2 text-sm text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-300 dark:text-white'>
+                  Account Settings
+                </a>
+                <a
+                  href='#'
+                  className='block px-4 py-2 text-sm text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-300 dark:text-white'>
+                  Logout
+                </a>
+              </div>
+            )}
           </div>
+
           <button onClick={toggleDarkMode}>
             {darkMode ? (
               <FaSun size={20} color='#ecf0f3' />

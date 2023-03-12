@@ -31,7 +31,19 @@ const TableTransaction = () => {
   const getData = async () => {
     try {
       const response = await axios.get('transactions');
-      setData(response.data);
+      const newData = response.data.map((item) => {
+        const parts = item.date_entry.split(' ');
+        const dateParts = parts[0].split('-');
+        const time = parts[1];
+        const formattedDate = `${dateParts[1]}-${dateParts[0]}-${dateParts[2]} ${time}`;
+        const timeStamp = Date.parse(new Date(formattedDate));
+        return {
+          ...item,
+          date_entry: timeStamp,
+        };
+      });
+      console.log(newData);
+      setData(newData);
     } catch (error) {
       console.log(error);
     }
@@ -89,6 +101,14 @@ const TableTransaction = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div class='flex items-center'>
+                No
+                <a onClick={() => handleSort('no_invoice')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <div class='flex items-center'>
                 Nama
                 <a onClick={() => handleSort('cust_id.name')} href='#'>
                   <SortIcon />
@@ -122,7 +142,7 @@ const TableTransaction = () => {
             <th scope='col' className='px-6 py-3 w-2/12'>
               <div class='flex items-center'>
                 Total Biaya
-                <a href='#'>
+                <a onClick={() => handleSort('total_biaya')} href='#'>
                   <SortIcon />
                 </a>
               </div>
@@ -130,7 +150,7 @@ const TableTransaction = () => {
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div class='flex items-center'>
                 Status
-                <a href='#'>
+                <a onClick={() => handleSort('status')} href='#'>
                   <SortIcon />
                 </a>
               </div>
@@ -146,8 +166,9 @@ const TableTransaction = () => {
               <th
                 scope='row'
                 className='px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
-                {d.date_entry.slice(0, 16).replace('T', ' ')}
+                {d.date_entry}
               </th>
+              <td className='px-6 py-2'>{d.no_invoice}</td>
               <td className='px-6 py-2'>{d.cust_id.name}</td>
               <td className='px-6 py-2'>
                 {d.unit.slice(0, 2).map((u, index) => (
@@ -161,9 +182,19 @@ const TableTransaction = () => {
                 Rp {d.total_biaya.toLocaleString('id-ID').replace(',', '.')}
               </td>
               <td className='px-6 py-2'>
-                <span className='bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
-                  {d.status}
-                </span>
+                {d.status === 'LUNAS' ? (
+                  <div className='w-full flex justify-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
+                    {d.status}
+                  </div>
+                ) : d.status === 'BERMASALAH' ? (
+                  <div className='w-full flex justify-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'>
+                    {d.status}
+                  </div>
+                ) : (
+                  <div className='w-full flex justify-center bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
+                    {d.status}
+                  </div>
+                )}
               </td>
             </tr>
           ))}
