@@ -16,7 +16,7 @@ const SortIcon = () => {
   );
 };
 
-const TableTransaction = () => {
+const TableCustomer = () => {
   const [data, setData] = useState([]);
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
@@ -30,7 +30,7 @@ const TableTransaction = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get('transactions');
+      const response = await axios.get('customers');
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -39,7 +39,7 @@ const TableTransaction = () => {
 
   const getDetails = (e, id) => {
     e.preventDefault();
-    router.push(`/transactions/${id}`);
+    router.push(`/customers/${id}`);
   };
 
   const indexOfLastItem = currentPage * itemPerPage;
@@ -79,49 +79,25 @@ const TableTransaction = () => {
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
           <tr>
-            <th scope='col' class='px-6 py-3'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
               <div class='flex items-center'>
-                Date
-                <a onClick={() => handleSort('date_entry')} href='#'>
+                No Id
+                <a onClick={() => handleSort('id')} href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-1/12'>
+            <th scope='col' className='px-6 py-3 w-5/12'>
               <div class='flex items-center'>
                 Nama
-                <a onClick={() => handleSort('cust_id.name')} href='#'>
+                <a onClick={() => handleSort('name')} href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-4/12'>
+            <th scope='col' className='px-6 py-3 w-3/12'>
               <div class='flex items-center'>
-                Unit
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div class='flex items-center'>
-                Pengambilan
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div class='flex items-center'>
-                Pengembalian
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div class='flex items-center'>
-                Total Biaya
+                No HP
                 <a href='#'>
                   <SortIcon />
                 </a>
@@ -129,7 +105,15 @@ const TableTransaction = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div class='flex items-center'>
-                Status
+                Role
+                <a onClick={() => handleSort('role')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-2/12'>
+              <div class='flex items-center'>
+                Action
                 <a href='#'>
                   <SortIcon />
                 </a>
@@ -146,24 +130,20 @@ const TableTransaction = () => {
               <th
                 scope='row'
                 className='px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
-                {d.date_entry.slice(0, 16).replace('T', ' ')}
+                {d.no_id}
               </th>
-              <td className='px-6 py-2'>{d.cust_id.name}</td>
+              <td className='px-6 py-2'>{d.name}</td>
+              <td className='px-6 py-2'>{d.phone}</td>
+              <td className='px-6 py-2'>{d.role}</td>
               <td className='px-6 py-2'>
-                {d.unit.slice(0, 2).map((u, index) => (
-                  <div key={index}>{u}</div>
-                ))}
-                {d.unit.length > 4 && <div>...</div>}
-              </td>
-              <td className='px-6 py-2'>{d.pengambilan}</td>
-              <td className='px-6 py-2'>{d.pengembalian}</td>
-              <td className='px-6 py-2'>
-                Rp {d.total_biaya.toLocaleString('id-ID').replace(',', '.')}
-              </td>
-              <td className='px-6 py-2'>
-                <span className='bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
-                  {d.status}
-                </span>
+                <div className='flex items-center space-x-4 text-sm'>
+                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue'>
+                    Edit
+                  </button>
+                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
@@ -173,4 +153,4 @@ const TableTransaction = () => {
   );
 };
 
-export default TableTransaction;
+export default TableCustomer;

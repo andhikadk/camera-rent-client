@@ -6,6 +6,7 @@ import { FaSun, FaMoon } from 'react-icons/fa';
 
 const Topbar = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [name, setName] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -25,11 +26,25 @@ const Topbar = () => {
 
   const refreshToken = async () => {
     try {
-      await axios.get('/token');
+      const response = await axios.get('/token');
+      getAccountSession(response.data.accessToken);
     } catch (error) {
       if (error.response) {
         router.push('/login');
       }
+    }
+  };
+
+  const getAccountSession = async (token) => {
+    try {
+      const response = await axios.get('/account', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setName(response.data.name);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -60,17 +75,22 @@ const Topbar = () => {
       <div className='flex flex-row justify-between py-2'>
         <Search />
         <div className='flex flex-row gap-8'>
+          {/* <button
+            onClick={handleLogout}
+            className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-300'>
+            Log out
+          </button> */}
+          <div className='flex flex-row items-center gap-2'>
+            <h2 className='text-gray-700 dark:text-gray-300 uppercase font-bold'>
+              {name}
+            </h2>
+          </div>
           <button onClick={toggleDarkMode}>
             {darkMode ? (
               <FaSun size={20} color='#ecf0f3' />
             ) : (
               <FaMoon size={18} color='#11142d' />
             )}
-          </button>
-          <button
-            onClick={handleLogout}
-            className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-300'>
-            Log out
           </button>
         </div>
       </div>
