@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import React from 'react';
-import { FaHome, FaChartBar, FaDollarSign, FaCog } from 'react-icons/fa';
+import { FaHome, FaChartBar, FaFileInvoiceDollar, FaCog } from 'react-icons/fa';
 
 const Sidebar = () => {
   return (
@@ -9,18 +10,22 @@ const Sidebar = () => {
           <div className='flex flex-col items-center justify-center h-20'>
             <h1 className='text-2xl font-bold'>Rental System</h1>
           </div>
-          <ul className='flex flex-col gap-4'>
-            <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
-              <FaHome size={20} />
-              <span>Dashboard</span>
-            </li>
+          <ul className='flex flex-col gap-2'>
+            <Link href='/'>
+              <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
+                <FaHome size={20} />
+                <span>Dashboard</span>
+              </li>
+            </Link>
+            <Link href='transactions'>
+              <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
+                <FaFileInvoiceDollar size={20} />
+                <span>Transactions</span>
+              </li>
+            </Link>
             <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
               <FaChartBar size={20} />
               <span>Analytics</span>
-            </li>
-            <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
-              <FaDollarSign size={20} />
-              <span>Transactions</span>
             </li>
             <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
               <FaCog size={20} />

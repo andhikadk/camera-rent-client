@@ -36,30 +36,30 @@ const Pagination = ({
 
   return (
     <nav
-      class='flex items-center justify-between pt-4 mb-4'
+      className='flex items-center justify-between pt-4 mb-4'
       aria-label='Table navigation'>
-      <span class='text-sm font-normal text-gray-500 dark:text-gray-400'>
+      <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
         Showing{' '}
-        <span class='font-semibold text-gray-900 dark:text-white'>
+        <span className='font-semibold text-gray-900 dark:text-white'>
           {indexOfFirstItem + 1}
         </span>{' '}
         to{' '}
-        <span class='font-semibold text-gray-900 dark:text-white'>
+        <span className='font-semibold text-gray-900 dark:text-white'>
           {indexOfLastItem > totalItem ? totalItem : indexOfLastItem}
         </span>{' '}
         of{' '}
-        <span class='font-semibold text-gray-900 dark:text-white'>
+        <span className='font-semibold text-gray-900 dark:text-white'>
           {totalItem}
         </span>{' '}
       </span>
-      <ul class='inline-flex items-center -space-x-px'>
+      <ul className='inline-flex items-center -space-x-px'>
         <li>
           <a
             onClick={() =>
               paginate(currentPage === 1 ? currentPage : currentPage - 1)
             }
             href='#'
-            class='px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+            className='px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
             Previous
           </a>
         </li>
@@ -68,7 +68,7 @@ const Pagination = ({
             <a
               onClick={() => paginate(page)}
               href='#'
-              class='block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+              className='block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
               {page}
             </a>
           </li>
@@ -81,7 +81,7 @@ const Pagination = ({
               )
             }
             href='#'
-            class='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+            className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
             Next
           </a>
         </li>
