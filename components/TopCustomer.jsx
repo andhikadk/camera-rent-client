@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import axios from '@/utils/axios';
 
 const TopCustomer = () => {
@@ -83,6 +84,14 @@ const TopCustomer = () => {
             </li>
           ))}
         </ul>
+        {/* more */}
+        <div className='mt-4 flex justify-end'>
+          <Link
+            href='/customers'
+            className='text-sm font-medium text-blue-600 hover:underline dark:text-blue-500'>
+            View all
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -90,6 +90,14 @@ const Dashboard = () => {
           <TopCustomer />
         </div>
       </div>
+      <div className='flex flex-row flex-wrap lg:flex-nowrap mb-4'>
+        <div className='w-full lg:w-2/3 lg:mr-4 mb-4 lg:mb-0'>
+          <SalesChart />
+        </div>
+        <div className='w-full lg:w-1/3'>
+          <TopCustomer />
+        </div>
+      </div>
     </Layout>
   );
 };

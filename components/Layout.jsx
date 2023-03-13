@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
         <Sidebar />
         <div className='flex-grow lg:ml-60'>
           <Topbar />
-          <div className='mx-auto max-w-screen-2xl px-4 mt-12 sm:px-6 lg:px-8 py-6'>
+          <div className='mx-auto max-w-screen-2xl px-4 mt-16 sm:px-6 lg:px-8 py-6'>
             {children}
           </div>
         </div>

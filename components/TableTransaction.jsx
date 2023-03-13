@@ -195,15 +195,15 @@ const TableTransaction = () => {
               </td>
               <td className='px-6 py-2'>
                 {d.status === 'LUNAS' ? (
-                  <div className='w-full flex justify-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
+                  <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
                     {d.status}
                   </div>
                 ) : d.status === 'BERMASALAH' ? (
-                  <div className='w-full flex justify-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'>
+                  <div className='w-full flex justify-center bg-red-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'>
                     {d.status}
                   </div>
                 ) : (
-                  <div className='w-full flex justify-center bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
+                  <div className='w-full flex justify-center bg-yellow-400 text-black text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
                     {d.status}
                   </div>
                 )}

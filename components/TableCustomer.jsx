@@ -113,7 +113,7 @@ const TableCustomer = () => {
         indexOfLastItem={indexOfLastItem}
       />
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+        <thead className='text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
@@ -185,7 +185,7 @@ const TableCustomer = () => {
           {currentItems.map((d) => (
             <tr
               onClick={(e) => getDetails(e, d._id)}
-              className='bg-gray-100 border-b dark:text-slate-300 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer'
+              className='bg-gray-50 border-b dark:text-slate-300 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer'
               key={d._id}>
               <th
                 scope='row'
@@ -199,11 +199,11 @@ const TableCustomer = () => {
               <td className='px-6 py-2'>{d.role}</td>
               <td className='px-6 py-2'>
                 {d.status === 'MEMBER' ? (
-                  <div className='w-fit flex justify-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
+                  <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
                     {d.status}
                   </div>
                 ) : (
-                  <div className='w-fit flex justify-center bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
+                  <div className='w-fit flex justify-center bg-yellow-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
                     {d.status}
                   </div>
                 )}

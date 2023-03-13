@@ -1,16 +1,19 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import {
   FaHome,
   FaChartBar,
   FaFileInvoiceDollar,
-  FaCog,
   FaUserAlt,
   FaCamera,
   FaCashRegister,
 } from 'react-icons/fa';
 
 const Sidebar = () => {
+  const router = useRouter();
+  const { pathname } = router;
+
   const navLink1 = [
     {
       name: 'Dashboard',
@@ -57,7 +60,12 @@ const Sidebar = () => {
           <ul className='flex flex-col gap-2'>
             {navLink1.map((link) => (
               <Link href={link.link} key={link.name}>
-                <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
+                <li
+                  className={`flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md ${
+                    pathname === link.link
+                      ? 'bg-gray-200 dark:bg-gray-700'
+                      : 'dark:hover:bg-gray-700 hover:bg-gray-200'
+                  } cursor-pointer`}>
                   {link.icon}
                   <span>{link.name}</span>
                 </li>
@@ -68,7 +76,12 @@ const Sidebar = () => {
           <ul className='flex flex-col gap-2'>
             {navLink2.map((link) => (
               <Link href={link.link} key={link.name}>
-                <li className='flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md dark:hover:bg-slate-700 hover:bg-gray-300 transition-colors duration-300 cursor-pointer'>
+                <li
+                  className={`flex flex-row items-center gap-4 px-4 py-2 mx-2 rounded-md ${
+                    pathname === link.link
+                      ? 'bg-gray-200 dark:bg-gray-700'
+                      : 'dark:hover:bg-gray-700 hover:bg-gray-200'
+                  } cursor-pointer`}>
                   {link.icon}
                   <span>{link.name}</span>
                 </li>

@@ -79,7 +79,7 @@ const Topbar = () => {
   const setNavbar = () => {};
 
   return (
-    <nav className='fixed w-full px-4 sm:px-6 lg:px-8'>
+    <nav className='fixed w-full px-4 sm:px-6 lg:px-8 shadow-md'>
       <div className='flex flex-row justify-between py-2'>
         <button
           style={{ color: darkMode ? 'white' : 'black' }}
