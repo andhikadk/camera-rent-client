@@ -7,7 +7,7 @@ const SortIcon = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      class='w-3 h-3 ml-1'
+      className='w-3 h-3 ml-1'
       aria-hidden='true'
       fill='currentColor'
       viewBox='0 0 320 512'>
@@ -17,7 +17,8 @@ const SortIcon = () => {
 };
 
 const TableCustomer = () => {
-  const [data, setData] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,17 +26,43 @@ const TableCustomer = () => {
   const router = useRouter();
 
   useEffect(() => {
-    getData();
+    getCustomers();
+    getTransactions();
   }, []);
 
-  const getData = async () => {
+  const getCustomers = async () => {
     try {
       const response = await axios.get('customers');
-      setData(response.data);
+      setCustomers(response.data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getTransactions = async () => {
+    try {
+      const response = await axios.get('transactions');
+      setTransactions(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const data = customers.map((customer) => {
+    const transaction = transactions.filter(
+      (transaction) => transaction.cust_id.id == customer._id
+    );
+    const totalTransaction = transaction.length;
+    const totalAmount = transaction.reduce(
+      (acc, curr) => acc + curr.total_biaya,
+      0
+    );
+    return {
+      ...customer,
+      totalTransaction,
+      totalAmount,
+    };
+  });
 
   const getDetails = (e, id) => {
     e.preventDefault();
@@ -45,7 +72,7 @@ const TableCustomer = () => {
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const lastPage = Math.ceil(data.length / itemPerPage);
+  const lastPage = Math.ceil(customers.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -61,15 +88,15 @@ const TableCustomer = () => {
       return 0;
     });
 
-    setData(sortedData);
+    setCustomers(sortedData);
     setSortColumn(column);
     setSortDirection(direction);
   };
 
   return (
-    <div className='relative overflow-x-auto'>
+    <div className='overflow-x-auto'>
       <Pagination
-        totalItem={data.length}
+        totalItem={customers.length}
         lastPage={lastPage}
         paginate={paginate}
         currentPage={currentPage}
@@ -80,7 +107,7 @@ const TableCustomer = () => {
         <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div class='flex items-center'>
+              <div className='flex items-center'>
                 No Id
                 <a onClick={() => handleSort('id')} href='#'>
                   <SortIcon />
@@ -88,15 +115,15 @@ const TableCustomer = () => {
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-5/12'>
-              <div class='flex items-center'>
+              <div className='flex items-center'>
                 Nama
                 <a onClick={() => handleSort('name')} href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-3/12'>
-              <div class='flex items-center'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <div className='flex items-center'>
                 No HP
                 <a href='#'>
                   <SortIcon />
@@ -104,7 +131,23 @@ const TableCustomer = () => {
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div class='flex items-center'>
+              <div className='flex items-center'>
+                Total Rent
+                <a onClick={() => handleSort('totalTransaction')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <div className='flex items-center'>
+                Rent Amount
+                <a onClick={() => handleSort('totalAmount')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <div className='flex items-center'>
                 Role
                 <a onClick={() => handleSort('role')} href='#'>
                   <SortIcon />
@@ -112,7 +155,7 @@ const TableCustomer = () => {
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
-              <div class='flex items-center'>
+              <div className='flex items-center'>
                 Action
                 <a href='#'>
                   <SortIcon />
@@ -134,6 +177,8 @@ const TableCustomer = () => {
               </th>
               <td className='px-6 py-2'>{d.name}</td>
               <td className='px-6 py-2'>{d.phone}</td>
+              <td className='px-6 py-2'>{d.totalTransaction}</td>
+              <td className='px-6 py-2'>{d.totalAmount}</td>
               <td className='px-6 py-2'>{d.role}</td>
               <td className='px-6 py-2'>
                 <div className='flex items-center space-x-4 text-sm'>

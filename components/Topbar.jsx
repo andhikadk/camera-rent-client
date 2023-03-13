@@ -76,15 +76,10 @@ const Topbar = () => {
   };
 
   return (
-    <nav className='px-4 sm:px-6 lg:px-8'>
+    <nav className='fixed w-full px-4 sm:px-6 lg:px-8'>
       <div className='flex flex-row justify-between py-2'>
         <Search />
-        <div className='flex flex-row gap-8'>
-          {/* <button
-            onClick={handleLogout}
-            className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-300'>
-            Log out
-          </button> */}
+        <div className='flex flex-row gap-8 lg:mr-60'>
           <div className='relative flex flex-row items-center gap-2'>
             <div
               className='flex items-center cursor-pointer'

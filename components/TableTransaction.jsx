@@ -91,7 +91,7 @@ const TableTransaction = () => {
   };
 
   return (
-    <div className='relative overflow-x-auto'>
+    <div className='overflow-x-auto'>
       <Pagination
         totalItem={data.length}
         lastPage={lastPage}
@@ -121,7 +121,7 @@ const TableTransaction = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
-                PJ Unit Keluar
+                PJ
                 <a onClick={() => handleSort('pj_unit_keluar')} href='#'>
                   <SortIcon />
                 </a>
