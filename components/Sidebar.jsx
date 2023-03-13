@@ -45,11 +45,6 @@ const Sidebar = () => {
       icon: <FaCamera size={20} />,
       link: '/units',
     },
-    {
-      name: 'Settings',
-      icon: <FaCog size={20} />,
-      link: '/settings',
-    },
   ];
 
   return (

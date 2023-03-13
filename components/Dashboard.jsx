@@ -42,26 +42,45 @@ const Dashboard = () => {
     }
   };
 
+  const cardList = [
+    {
+      title: 'Total Customers',
+      subtitle: custNumber,
+      icon: <FaUserAlt />,
+    },
+    {
+      title: 'Total Transactions',
+      subtitle: `Rp ${transaction
+        .toLocaleString('id-ID')
+        .replace(',', '.')},00`,
+      icon: <FaDollarSign />,
+    },
+    {
+      title: 'On Rent',
+      subtitle: '16',
+      icon: <FaClock />,
+    },
+    {
+      title: 'Rent Today',
+      subtitle: '4',
+      icon: <FaShoppingCart />,
+    },
+  ];
+
   return (
     <Layout>
       <div className='flex flex-row justify-between mb-6'>
         <h1>Dashboard</h1>
       </div>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-4'>
-        <Card
-          title='Total Customers'
-          subtitle={custNumber}
-          icon={<FaUserAlt />}
-        />
-        <Card
-          title='Total Transactions'
-          subtitle={`Rp ${transaction
-            .toLocaleString('id-ID')
-            .replace(',', '.')},00`}
-          icon={<FaDollarSign />}
-        />
-        <Card title='On Rent' subtitle='16' icon={<FaClock />} />
-        <Card title='Rent Today' subtitle='4' icon={<FaShoppingCart />} />
+        {cardList.map((card, index) => (
+          <Card
+            key={index}
+            title={card.title}
+            subtitle={card.subtitle}
+            icon={card.icon}
+          />
+        ))}
       </div>
       <div className='flex flex-row flex-wrap lg:flex-nowrap mb-4'>
         <div className='w-full lg:w-2/3 mb-4 lg:mr-4'>
