@@ -6,7 +6,7 @@ const Search = () => {
       <label htmlFor='table-search' className='sr-only'>
         Search
       </label>
-      <div className='relative mt-1'>
+      <div className='relative mt-1 hidden md:block'>
         <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
           <svg
             className='w-5 h-5 text-gray-500 dark:text-gray-400'

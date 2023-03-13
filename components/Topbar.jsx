@@ -3,6 +3,7 @@ import Search from './Search';
 import { useRouter } from 'next/router';
 import axios from '../utils/axios';
 import { FaSun, FaMoon } from 'react-icons/fa';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 const Topbar = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -75,9 +76,17 @@ const Topbar = () => {
     }
   };
 
+  const setNavbar = () => {};
+
   return (
     <nav className='fixed w-full px-4 sm:px-6 lg:px-8'>
       <div className='flex flex-row justify-between py-2'>
+        <button
+          style={{ color: darkMode ? 'white' : 'black' }}
+          onClick={() => setNavbar()}
+          className='p-2'>
+          <AiOutlineMenu size={25} />
+        </button>
         <Search />
         <div className='flex flex-row gap-8 lg:mr-60'>
           <div className='relative flex flex-row items-center gap-2'>
@@ -108,6 +117,7 @@ const Topbar = () => {
                   Account Settings
                 </a>
                 <a
+                  onClick={handleLogout}
                   href='#'
                   className='block px-4 py-2 text-sm text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-300 dark:text-white'>
                   Logout

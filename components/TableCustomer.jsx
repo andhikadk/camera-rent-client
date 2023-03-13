@@ -57,12 +57,21 @@ const TableCustomer = () => {
       (acc, curr) => acc + curr.total_biaya,
       0
     );
+    // add field status which conatin "MEMBER" and "NON MEMBER" member when customer have transactions => 3
+    if (totalTransaction >= 3) {
+      customer.status = 'MEMBER';
+    } else {
+      customer.status = 'NON MEMBER';
+    }
+
     return {
       ...customer,
       totalTransaction,
       totalAmount,
     };
   });
+
+  console.log(data);
 
   const getDetails = (e, id) => {
     e.preventDefault();
@@ -114,7 +123,7 @@ const TableCustomer = () => {
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-5/12'>
+            <th scope='col' className='px-6 py-3 w-3/12'>
               <div className='flex items-center'>
                 Nama
                 <a onClick={() => handleSort('name')} href='#'>
@@ -130,7 +139,7 @@ const TableCustomer = () => {
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-1/12'>
+            <th scope='col' className='px-6 py-3 w-2/12'>
               <div className='flex items-center'>
                 Total Rent
                 <a onClick={() => handleSort('totalTransaction')} href='#'>
@@ -138,7 +147,7 @@ const TableCustomer = () => {
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-1/12'>
+            <th scope='col' className='px-6 py-3 w-2/12'>
               <div className='flex items-center'>
                 Rent Amount
                 <a onClick={() => handleSort('totalAmount')} href='#'>
@@ -150,6 +159,14 @@ const TableCustomer = () => {
               <div className='flex items-center'>
                 Role
                 <a onClick={() => handleSort('role')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-2/12'>
+              <div className='flex items-center'>
+                Status
+                <a onClick={() => handleSort('status')} href='#'>
                   <SortIcon />
                 </a>
               </div>
@@ -181,13 +198,24 @@ const TableCustomer = () => {
               <td className='px-6 py-2'>{d.totalAmount}</td>
               <td className='px-6 py-2'>{d.role}</td>
               <td className='px-6 py-2'>
+                {d.status === 'MEMBER' ? (
+                  <div className='w-fit flex justify-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
+                    {d.status}
+                  </div>
+                ) : (
+                  <div className='w-fit flex justify-center bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
+                    {d.status}
+                  </div>
+                )}
+              </td>
+              <td className='px-6 py-2'>
                 <div className='flex items-center space-x-4 text-sm'>
                   <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue'>
                     Edit
                   </button>
-                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
+                  {/* <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
                     Delete
-                  </button>
+                  </button> */}
                 </div>
               </td>
             </tr>

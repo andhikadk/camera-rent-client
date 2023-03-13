@@ -40,7 +40,7 @@ const TopCustomer = () => {
   };
 
   return (
-    <div className='w-full p-4 bg-white rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
+    <div className='w-full h-full p-4 bg-white rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
       <div className='flex items-center justify-between mb-4'>
         <h5 className='text-xl font-bold leading-none text-gray-900 dark:text-white'>
           Top Customers

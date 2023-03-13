@@ -48,7 +48,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <nav className='hidden lg:block fixed top-0 left-0 w-60 h-screen text-gray-700 dark:text-white'>
+    <nav className='hidden lg:block shadow-xl fixed top-0 left-0 w-60 h-screen text-gray-700 dark:text-white'>
       <div className='flex flex-col justify-between h-full'>
         <div>
           <div className='flex flex-col items-center justify-center h-20'>
