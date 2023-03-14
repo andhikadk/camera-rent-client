@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Search from './Search';
+import Search from './common/Search';
 import { useRouter } from 'next/router';
 import axios from '../utils/axios';
 import { FaSun, FaMoon } from 'react-icons/fa';
@@ -87,7 +87,6 @@ const Topbar = () => {
           className='p-2'>
           <AiOutlineMenu size={25} />
         </button>
-        <Search />
         <div className='flex flex-row gap-8 lg:mr-60'>
           <div className='relative flex flex-row items-center gap-2'>
             <div

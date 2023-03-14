@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Card';
+import Card from './common/Card';
 import Layout from './Layout';
 import TopCustomer from './TopCustomer';
 import {

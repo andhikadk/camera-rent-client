@@ -71,8 +71,6 @@ const TableCustomer = () => {
     };
   });
 
-  console.log(data);
-
   const getDetails = (e, id) => {
     e.preventDefault();
     router.push(`/customers/${id}`);

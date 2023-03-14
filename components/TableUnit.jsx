@@ -16,8 +16,8 @@ const SortIcon = () => {
   );
 };
 
-const TableTransaction = () => {
-  const [data, setData] = useState([]);
+const TableUnit = () => {
+  const [units, setUnits] = useState([]);
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,25 +25,13 @@ const TableTransaction = () => {
   const router = useRouter();
 
   useEffect(() => {
-    getData();
+    getUnits();
   }, []);
 
-  const getData = async () => {
+  const getUnits = async () => {
     try {
-      const response = await axios.get('transactions');
-      const newData = response.data.map((item) => {
-        const parts = item.date_entry.split(' ');
-        const dateParts = parts[0].split('-');
-        const time = parts[1];
-        const formattedDate = `${dateParts[1]}-${dateParts[0]}-${dateParts[2]} ${time}`;
-        const timeStamp = Date.parse(new Date(formattedDate));
-        return {
-          ...item,
-          date_entry: timeStamp,
-        };
-      });
-      console.log(newData);
-      setData(newData);
+      const response = await axios.get('units');
+      setUnits(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -51,19 +39,19 @@ const TableTransaction = () => {
 
   const getDetails = (e, id) => {
     e.preventDefault();
-    router.push(`/transactions/${id}`);
+    router.push(`/units/${id}`);
   };
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const lastPage = Math.ceil(data.length / itemPerPage);
+  const currentItems = units.slice(indexOfFirstItem, indexOfLastItem);
+  const lastPage = Math.ceil(units.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSort = (column) => {
     const direction = sortColumn ? !sortDirection : false;
-    const sortedData = data.sort((a, b) => {
+    const sortedData = units.sort((a, b) => {
       if (a[column] < b[column]) {
         return direction ? -1 : 1;
       }
@@ -73,19 +61,7 @@ const TableTransaction = () => {
       return 0;
     });
 
-    if (column === 'cust_id.name') {
-      data.sort((a, b) => {
-        if (a.cust_id.name < b.cust_id.name) {
-          return direction ? -1 : 1;
-        }
-        if (a.cust_id.name > b.cust_id.name) {
-          return direction ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-
-    setData(sortedData);
+    setCustomers(sortedData);
     setSortColumn(column);
     setSortDirection(direction);
   };
@@ -93,7 +69,7 @@ const TableTransaction = () => {
   return (
     <div className='overflow-x-auto'>
       <Pagination
-        totalItem={data.length}
+        totalItem={units.length}
         lastPage={lastPage}
         paginate={paginate}
         currentPage={currentPage}
@@ -101,60 +77,52 @@ const TableTransaction = () => {
         indexOfLastItem={indexOfLastItem}
       />
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+        <thead className='text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400'>
           <tr>
-            <th scope='col' className='px-6 py-3'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
-                No
-                <a onClick={() => handleSort('no_invoice')} href='#'>
+                No Id
+                <a onClick={() => handleSort('id')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-3/12'>
+              <div className='flex items-center'>
+                Nama
+                <a onClick={() => handleSort('name')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-2/12'>
+              <div className='flex items-center'>
+                Kode
+                <a href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-2/12'>
+              <div className='flex items-center'>
+                Jenis
+                <a onClick={() => handleSort('totalTransaction')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-2/12'>
+              <div className='flex items-center'>
+                Type
+                <a onClick={() => handleSort('totalAmount')} href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
-                Nama Customer
-                <a onClick={() => handleSort('cust_id.name')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
-                PJ
-                <a onClick={() => handleSort('pj_unit_keluar')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-4/12'>
-              <div className='flex items-center'>
-                Unit
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Pengambilan
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Pengembalian
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Total Biaya
-                <a onClick={() => handleSort('total_biaya')} href='#'>
+                Posisi
+                <a onClick={() => handleSort('role')} href='#'>
                   <SortIcon />
                 </a>
               </div>
@@ -167,38 +135,38 @@ const TableTransaction = () => {
                 </a>
               </div>
             </th>
+            <th scope='col' className='px-6 py-3 w-2/12'>
+              <div className='flex items-center'>
+                Action
+                <a href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((d) => (
             <tr
               onClick={(e) => getDetails(e, d._id)}
-              className='bg-gray-100 border-b dark:text-slate-300 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer'
+              className='bg-gray-50 border-b dark:text-slate-300 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer'
               key={d._id}>
-              <td className='px-6 py-2'>{d.no_invoice}</td>
               <th
                 scope='row'
                 className='px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
-                {d.cust_id.name}
+                {d.no}
               </th>
-              <td className='px-6 py-2'>{d.pj_unit_keluar}</td>
+              <td className='px-6 py-2'>{d.nama}</td>
+              <td className='px-6 py-2'>{d.kode}</td>
+              <td className='px-6 py-2'>{d.jenis}</td>
+              <td className='px-6 py-2'>{d.type}</td>
+              <td className='px-6 py-2'>{d.posisi}</td>
               <td className='px-6 py-2'>
-                {d.unit.slice(0, 2).map((u, index) => (
-                  <div key={index}>{u}</div>
-                ))}
-                {d.unit.length > 4 && <div>...</div>}
-              </td>
-              <td className='px-6 py-2'>{d.pengambilan}</td>
-              <td className='px-6 py-2'>{d.pengembalian}</td>
-              <td className='px-6 py-2'>
-                Rp {d.total_biaya.toLocaleString('id-ID').replace(',', '.')}
-              </td>
-              <td className='px-6 py-2'>
-                {d.status === 'LUNAS' ? (
+                {d.status === 'Normal' ? (
                   <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
                     {d.status}
                   </div>
-                ) : d.status === 'BERMASALAH' ? (
+                ) : d.status === 'Bermasalah' ? (
                   <div className='w-fit flex justify-center bg-red-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'>
                     {d.status}
                   </div>
@@ -208,6 +176,16 @@ const TableTransaction = () => {
                   </div>
                 )}
               </td>
+              <td className='px-6 py-2'>
+                <div className='flex items-center space-x-4 text-sm'>
+                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue'>
+                    Edit
+                  </button>
+                  {/* <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
+                    Delete
+                  </button> */}
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -216,4 +194,4 @@ const TableTransaction = () => {
   );
 };
 
-export default TableTransaction;
+export default TableUnit;
