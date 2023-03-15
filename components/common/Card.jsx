@@ -2,9 +2,9 @@ import React from 'react';
 
 const Card = ({ title, subtitle, icon }) => {
   return (
-    <div className='min-w-0 rounded-lg shadow-sm overflow-hidden bg-white dark:bg-gray-800'>
+    <div className='min-w-0 rounded-lg shadow-sm overflow-hidden bg-zinc-50 dark:bg-zinc-800'>
       <div className='p-4 flex items-center'>
-        <div className={`p-4 rounded-full text-slate-100 bg-blue-600 mr-4`}>
+        <div className={`p-4 rounded-full text-zinc-100 bg-blue-600 mr-4`}>
           {icon}
         </div>
         <div>

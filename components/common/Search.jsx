@@ -9,7 +9,7 @@ const Search = ({ query, setQuery }) => {
       <div className='relative mt-1 hidden md:block border-md'>
         <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
           <svg
-            className='w-5 h-5 text-gray-500 dark:text-gray-400'
+            className='w-5 h-5 text-zinc-500 dark:text-zinc-400'
             aria-hidden='true'
             fill='currentColor'
             viewBox='0 0 20 20'
@@ -25,7 +25,7 @@ const Search = ({ query, setQuery }) => {
           onChange={(e) => setQuery(e.target.value)}
           type='text'
           id='table-search'
-          className='block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg sm:w-96 w-full bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
+          className='block p-2 pl-10 text-sm text-zinc-900 border border-zinc-300 rounded-lg sm:w-96 w-full bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white'
           placeholder='Search for items'
         />
       </div>

@@ -1,23 +1,23 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import TableUnit from '@/components/TableUnit';
+import TableTransaction from '@/components/tables/TableTransaction';
 import { FaPlus } from 'react-icons/fa';
 import Button from '@/components/common/Button';
 
-const units = () => {
+const transactions = () => {
   return (
     <Layout>
       <div className='flex flex-row justify-between'>
-        <h1>Units</h1>
+        <h1>Transactions</h1>
         <Button
           icon={<FaPlus className='mr-3' />}
-          text='Add Unit'
-          link='/units/add'
+          text='Add Transaction'
+          link='/transactions/add'
         />
       </div>
-      <TableUnit />
+      <TableTransaction />
     </Layout>
   );
 };
 
-export default units;
+export default transactions;

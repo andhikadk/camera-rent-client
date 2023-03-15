@@ -1,23 +1,23 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import TableTransaction from '@/components/TableTransaction';
+import TableCustomer from '@/components/tables/TableCustomer';
 import { FaPlus } from 'react-icons/fa';
 import Button from '@/components/common/Button';
 
-const transactions = () => {
+const customers = () => {
   return (
     <Layout>
       <div className='flex flex-row justify-between'>
-        <h1>Transactions</h1>
+        <h1>Customers</h1>
         <Button
           icon={<FaPlus className='mr-3' />}
-          text='Add Transaction'
-          link='/transactions/add'
+          text='Add Customer'
+          link='/customers/add'
         />
       </div>
-      <TableTransaction />
+      <TableCustomer />
     </Layout>
   );
 };
 
-export default transactions;
+export default customers;

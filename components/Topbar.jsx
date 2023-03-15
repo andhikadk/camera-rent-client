@@ -76,15 +76,10 @@ const Topbar = () => {
     }
   };
 
-  const setNavbar = () => {};
-
   return (
-    <nav className='fixed w-full px-4 sm:px-6 lg:px-8 shadow-md'>
+    <nav id='topbar' className='fixed w-full px-4 sm:px-6 lg:px-8 shadow-md'>
       <div className='flex flex-row justify-between py-2'>
-        <button
-          style={{ color: darkMode ? 'white' : 'black' }}
-          onClick={() => setNavbar()}
-          className='p-2'>
+        <button style={{ color: darkMode ? 'white' : 'black' }} className='p-2'>
           <AiOutlineMenu size={25} />
         </button>
         <div className='flex flex-row gap-8 lg:mr-60'>
@@ -92,12 +87,12 @@ const Topbar = () => {
             <div
               className='flex items-center cursor-pointer'
               onClick={toggleDropdown}>
-              <h2 className='text-gray-700 dark:text-gray-300 uppercase font-bold mr-2'>
-                {name}
-              </h2>
+              <h2 className='mr-2'>{name}</h2>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                className='h-5 w-5 text-gray-700 dark:text-gray-300'
+                className={`h-5 w-5 ${
+                  darkMode ? 'text-zinc-200' : 'text-zinc-800'
+                }`}
                 viewBox='0 0 20 20'
                 fill='currentColor'>
                 <path
@@ -109,16 +104,16 @@ const Topbar = () => {
             </div>
 
             {isOpen && (
-              <div className='absolute right-0 mt-36 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10'>
+              <div className='absolute right-0 mt-36 w-48 bg-white dark:bg-zinc-800 rounded-md shadow-lg z-10'>
                 <a
                   href='#'
-                  className='block px-4 py-2 text-sm text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-300 dark:text-white'>
+                  className='block px-4 py-2 text-sm text-zinc-700 dark:hover:bg-slate-700 hover:bg-zinc-300 dark:text-white'>
                   Account Settings
                 </a>
                 <a
                   onClick={handleLogout}
                   href='#'
-                  className='block px-4 py-2 text-sm text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-300 dark:text-white'>
+                  className='block px-4 py-2 text-sm text-zinc-700 dark:hover:bg-slate-700 hover:bg-zinc-300 dark:text-white'>
                   Logout
                 </a>
               </div>

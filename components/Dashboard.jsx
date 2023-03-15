@@ -45,7 +45,7 @@ const Dashboard = () => {
   const cardList = [
     {
       title: 'Total Customers',
-      subtitle: custNumber,
+      subtitle: custNumber || 0,
       icon: <FaUserAlt />,
     },
     {

@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import axios from '../utils/axios';
-import Search from './common/Search';
-import Pagination from './Pagination';
+import axios from '../../utils/axios';
+import Pagination from '../common/Pagination';
+import Search from '../common/Search';
 
 const SortIcon = () => {
   return (
@@ -129,8 +129,8 @@ const TableCustomer = () => {
           indexOfLastItem={indexOfLastItem}
         />
       </div>
-      <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-        <thead className='text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400'>
+      <table className='w-full text-sm text-left text-zinc-500 dark:text-zinc-400'>
+        <thead className='text-xs text-zinc-700 uppercase bg-white dark:bg-zinc-700 dark:text-zinc-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
@@ -202,11 +202,11 @@ const TableCustomer = () => {
           {currentItems.map((d) => (
             <tr
               onClick={(e) => getDetails(e, d._id)}
-              className='bg-gray-50 border-b dark:text-slate-300 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer'
+              className='bg-zinc-50 border-b dark:text-slate-300 dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 cursor-pointer'
               key={d._id}>
               <th
                 scope='row'
-                className='px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
+                className='px-6 py-2 font-medium text-zinc-900 whitespace-nowrap dark:text-white'>
                 {d.no_id}
               </th>
               <td className='px-6 py-2'>{d.name}</td>

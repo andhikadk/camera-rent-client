@@ -41,9 +41,9 @@ const TopCustomer = () => {
   };
 
   return (
-    <div className='w-full h-full p-4 bg-white rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
+    <div className='w-full h-full p-4 bg-zinc-50 rounded-lg shadow-sm sm:p-8 dark:bg-zinc-800 dark:border-zinc-700'>
       <div className='flex items-center justify-between mb-4'>
-        <h5 className='text-xl font-bold leading-none text-gray-900 dark:text-white'>
+        <h5 className='text-xl font-bold leading-none text-zinc-900 dark:text-white'>
           Top Customers
         </h5>
         <a
@@ -56,7 +56,7 @@ const TopCustomer = () => {
       <div className='flow-root'>
         <ul
           role='list'
-          className='divide-y divide-gray-200 dark:divide-gray-700'>
+          className='divide-y divide-zinc-200 dark:divide-zinc-700'>
           {customers.map((c) => (
             <li className='py-3 sm:py-4' key={c.customer._id}>
               <div className='flex items-center space-x-4'>
@@ -70,10 +70,10 @@ const TopCustomer = () => {
                   />
                 </div>
                 <div className='flex-1 min-w-0'>
-                  <p className='text-sm font-medium text-gray-900 truncate dark:text-white'>
+                  <p className='text-sm font-medium text-zinc-900 truncate dark:text-white'>
                     {c.customer.name}
                   </p>
-                  <p className='text-sm text-gray-500 truncate dark:text-gray-400'>
+                  <p className='text-sm text-zinc-500 truncate dark:text-zinc-400'>
                     {c.count} transactions
                   </p>
                 </div>

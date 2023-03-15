@@ -38,17 +38,17 @@ const Pagination = ({
     <div
       className='flex items-center justify-between pt-4 mb-4'
       aria-label='Table navigation'>
-      <div className='text-sm font-normal text-gray-500 dark:text-gray-400'>
+      <div className='text-sm font-normal text-zinc-500 dark:text-zinc-400'>
         Showing{' '}
-        <span className='font-semibold text-gray-900 dark:text-white'>
+        <span className='font-semibold text-zinc-900 dark:text-white'>
           {indexOfFirstItem + 1}
         </span>{' '}
         to{' '}
-        <span className='font-semibold text-gray-900 dark:text-white'>
+        <span className='font-semibold text-zinc-900 dark:text-white'>
           {indexOfLastItem > totalItem ? totalItem : indexOfLastItem}
         </span>{' '}
         of{' '}
-        <span className='font-semibold text-gray-900 dark:text-white'>
+        <span className='font-semibold text-zinc-900 dark:text-white'>
           {totalItem}
         </span>{' '}
       </div>
@@ -59,7 +59,7 @@ const Pagination = ({
               paginate(currentPage === 1 ? currentPage : currentPage - 1)
             }
             href='#'
-            className='px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+            className='px-3 py-2 ml-0 leading-tight text-zinc-500 bg-white border border-zinc-300 rounded-l-lg hover:bg-zinc-100 hover:text-zinc-700 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white'>
             Previous
           </a>
         </li>
@@ -68,7 +68,7 @@ const Pagination = ({
             <a
               onClick={() => paginate(page)}
               href='#'
-              className='block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+              className='block px-3 py-2 leading-tight text-zinc-500 bg-white border border-zinc-300 hover:bg-zinc-100 hover:text-zinc-700 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white'>
               {page}
             </a>
           </li>
@@ -81,7 +81,7 @@ const Pagination = ({
               )
             }
             href='#'
-            className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
+            className='px-3 py-2 leading-tight text-zinc-500 bg-white border border-zinc-300 rounded-r-lg hover:bg-zinc-100 hover:text-zinc-700 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white'>
             Next
           </a>
         </li>

@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import axios from '../utils/axios';
-import Search from './common/Search';
-import Pagination from './Pagination';
+import axios from '../../utils/axios';
+import Pagination from '../common/Pagination';
+import Search from '../common/Search';
 
 const SortIcon = () => {
   return (
@@ -17,8 +17,8 @@ const SortIcon = () => {
   );
 };
 
-const TableUnit = () => {
-  const [units, setUnits] = useState([]);
+const TableTransaction = () => {
+  const [data, setData] = useState([]);
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,13 +27,25 @@ const TableUnit = () => {
   const router = useRouter();
 
   useEffect(() => {
-    getUnits();
+    getData();
   }, []);
 
-  const getUnits = async () => {
+  const getData = async () => {
     try {
-      const response = await axios.get('units');
-      setUnits(response.data);
+      const response = await axios.get('transactions');
+      const newData = response.data.map((item) => {
+        const parts = item.date_entry.split(' ');
+        const dateParts = parts[0].split('-');
+        const time = parts[1];
+        const formattedDate = `${dateParts[1]}-${dateParts[0]}-${dateParts[2]} ${time}`;
+        const timeStamp = Date.parse(new Date(formattedDate));
+        return {
+          ...item,
+          date_entry: timeStamp,
+        };
+      });
+      console.log(newData);
+      setData(newData);
     } catch (error) {
       console.log(error);
     }
@@ -41,33 +53,33 @@ const TableUnit = () => {
 
   const getDetails = (e, id) => {
     e.preventDefault();
-    router.push(`/units/${id}`);
+    router.push(`/transactions/${id}`);
   };
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const filteredUnits = units.filter((item) => {
+  const filteredUnits = data.filter((item) => {
     if (query === '') {
       return item;
     } else if (
-      item.nama.toLowerCase().includes(query.toLowerCase()) ||
-      item.kode.toLowerCase().includes(query.toLowerCase()) ||
-      item.jenis.toLowerCase().includes(query.toLowerCase()) ||
-      item.type.toLowerCase().includes(query.toLowerCase()) ||
-      item.posisi.toLowerCase().includes(query.toLowerCase()) ||
-      item.status.toLowerCase().includes(query.toLowerCase())
+      item.no_invoice.toString().toLowerCase().includes(query.toLowerCase()) ||
+      item.cust_id.name.toLowerCase().includes(query.toLowerCase()) ||
+      item.pj_unit_keluar.toLowerCase().includes(query.toLowerCase()) ||
+      item.pengambilan.toLowerCase().includes(query.toLowerCase()) ||
+      item.pengembalian.toLowerCase().includes(query.toLowerCase()) ||
+      item.total_biaya.toString().toLowerCase().includes(query.toLowerCase())
     ) {
       return item;
     }
   });
   const currentItems = filteredUnits.slice(indexOfFirstItem, indexOfLastItem);
-  const lastPage = Math.ceil(units.length / itemPerPage);
+  const lastPage = Math.ceil(data.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSort = (column) => {
     const direction = sortColumn ? !sortDirection : false;
-    const sortedData = units.sort((a, b) => {
+    const sortedData = data.sort((a, b) => {
       if (a[column] < b[column]) {
         return direction ? -1 : 1;
       }
@@ -77,7 +89,19 @@ const TableUnit = () => {
       return 0;
     });
 
-    setUnits(sortedData);
+    if (column === 'cust_id.name') {
+      data.sort((a, b) => {
+        if (a.cust_id.name < b.cust_id.name) {
+          return direction ? -1 : 1;
+        }
+        if (a.cust_id.name > b.cust_id.name) {
+          return direction ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    setData(sortedData);
     setSortColumn(column);
     setSortDirection(direction);
   };
@@ -87,7 +111,7 @@ const TableUnit = () => {
       <div className='flex flex-row items-center justify-between'>
         <Search query={query} setQuery={setQuery} />
         <Pagination
-          totalItem={units.length}
+          totalItem={data.length}
           lastPage={lastPage}
           paginate={paginate}
           currentPage={currentPage}
@@ -95,28 +119,36 @@ const TableUnit = () => {
           indexOfLastItem={indexOfLastItem}
         />
       </div>
-      <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-        <thead className='text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400'>
+      <table className='w-full text-sm text-left text-zinc-500 dark:text-zinc-400'>
+        <thead className='text-xs text-zinc-700 uppercase bg-zinc-50 dark:bg-zinc-700 dark:text-zinc-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
-                No Id
-                <a onClick={() => handleSort('no')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-3/12'>
-              <div className='flex items-center'>
-                Nama
-                <a onClick={() => handleSort('name')} href='#'>
+                No
+                <a onClick={() => handleSort('no_invoice')} href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <div className='flex items-center'>
-                Kode
+                Nama Customer
+                <a onClick={() => handleSort('cust_id.name')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <div className='flex items-center'>
+                PJ
+                <a onClick={() => handleSort('pj_unit_keluar')} href='#'>
+                  <SortIcon />
+                </a>
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3 w-3/12'>
+              <div className='flex items-center'>
+                Unit
                 <a href='#'>
                   <SortIcon />
                 </a>
@@ -124,24 +156,24 @@ const TableUnit = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <div className='flex items-center'>
-                Jenis
-                <a onClick={() => handleSort('totalTransaction')} href='#'>
+                Pengambilan
+                <a href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <div className='flex items-center'>
-                Type
-                <a onClick={() => handleSort('totalAmount')} href='#'>
+                Pengembalian
+                <a href='#'>
                   <SortIcon />
                 </a>
               </div>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
-                Posisi
-                <a onClick={() => handleSort('role')} href='#'>
+                Biaya
+                <a onClick={() => handleSort('total_biaya')} href='#'>
                   <SortIcon />
                 </a>
               </div>
@@ -154,38 +186,38 @@ const TableUnit = () => {
                 </a>
               </div>
             </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Action
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((d) => (
             <tr
               onClick={(e) => getDetails(e, d._id)}
-              className='bg-gray-50 border-b dark:text-slate-300 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer'
+              className='bg-zinc-100 border-b dark:text-slate-300 dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 cursor-pointer'
               key={d._id}>
+              <td className='px-6 py-2'>{d.no_invoice}</td>
               <th
                 scope='row'
-                className='px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
-                {d.no}
+                className='px-6 py-2 font-medium text-zinc-900 whitespace-nowrap dark:text-white'>
+                {d.cust_id.name}
               </th>
-              <td className='px-6 py-2'>{d.nama}</td>
-              <td className='px-6 py-2'>{d.kode}</td>
-              <td className='px-6 py-2'>{d.jenis}</td>
-              <td className='px-6 py-2'>{d.type}</td>
-              <td className='px-6 py-2'>{d.posisi}</td>
+              <td className='px-6 py-2'>{d.pj_unit_keluar}</td>
               <td className='px-6 py-2'>
-                {d.status === 'Normal' ? (
+                {d.unit.slice(0, 2).map((u, index) => (
+                  <div key={index}>{u}</div>
+                ))}
+                {d.unit.length > 4 && <div>...</div>}
+              </td>
+              <td className='px-6 py-2'>{d.pengambilan}</td>
+              <td className='px-6 py-2'>{d.pengembalian}</td>
+              <td className='px-6 py-2'>
+                Rp {d.total_biaya.toLocaleString('id-ID').replace(',', '.')}
+              </td>
+              <td className='px-6 py-2'>
+                {d.status === 'LUNAS' ? (
                   <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
                     {d.status}
                   </div>
-                ) : d.status === 'Bermasalah' ? (
+                ) : d.status === 'BERMASALAH' ? (
                   <div className='w-fit flex justify-center bg-red-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'>
                     {d.status}
                   </div>
@@ -195,16 +227,6 @@ const TableUnit = () => {
                   </div>
                 )}
               </td>
-              <td className='px-6 py-2'>
-                <div className='flex items-center space-x-4 text-sm'>
-                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue'>
-                    Edit
-                  </button>
-                  {/* <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
-                    Delete
-                  </button> */}
-                </div>
-              </td>
             </tr>
           ))}
         </tbody>
@@ -213,4 +235,4 @@ const TableUnit = () => {
   );
 };
 
-export default TableUnit;
+export default TableTransaction;

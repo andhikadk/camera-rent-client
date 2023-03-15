@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import axios from '../utils/axios';
+import axios from '../../utils/axios';
 
-const Register = () => {
-  const [name, setName] = useState('');
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confPassword, setConfPassword] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -39,13 +37,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/users', {
-        name,
+      const credentials = await axios.post('/login', {
         email,
         password,
-        confPassword,
       });
-      router.push('/login');
+      console.log(credentials);
+      document.cookie = `refreshToken=${credentials.data.refreshToken}`;
+      router.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -53,28 +51,17 @@ const Register = () => {
 
   return (
     <div className='flex justify-center items-center h-screen'>
-      <form onSubmit={handleSubmit} className='bg-white p-8 rounded-lg w-96'>
-        <h2 className='text-2xl font-medium mb-5 text-center'>Register</h2>
-        <div className='mb-5'>
-          <label className='block text-gray-700 font-bold mb-2' htmlFor='name'>
-            Name
-          </label>
-          <input
-            className='border border-gray-400 p-2 w-full rounded-md'
-            type='text'
-            id='name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+      <form
+        onSubmit={handleSubmit}
+        className='bg-white p-8 rounded-lg w-80 md:w-96'>
+        <h2 className='text-2xl font-medium mb-5 text-center'>Login</h2>
         <div className='mb-5'>
           <label className='block text-gray-700 font-bold mb-2' htmlFor='email'>
             Email
           </label>
           <input
             className='border border-gray-400 p-2 w-full rounded-md'
-            type='email'
+            type='text'
             id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -96,28 +83,13 @@ const Register = () => {
             required
           />
         </div>
-        <div className='mb-5'>
-          <label
-            className='block text-gray-700 font-bold mb-2'
-            htmlFor='confirmPassword'>
-            Confirm Password
-          </label>
-          <input
-            className='border border-gray-400 p-2 w-full rounded-md'
-            type='password'
-            id='confPassword'
-            value={confPassword}
-            onChange={(e) => setConfPassword(e.target.value)}
-            required
-          />
-        </div>
         <button className='bg-blue-500 text-white py-2 px-4 w-full rounded-md hover:bg-blue-700 transition-colors duration-300'>
-          Register
+          Login
         </button>
         <p className='text-center mt-3'>
-          Already have an account?{' '}
-          <Link href='/login' className='text-blue-500'>
-            Login
+          Don't have an account?{' '}
+          <Link href='/register' className='text-blue-500'>
+            Register
           </Link>
         </p>
       </form>
@@ -125,4 +97,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
