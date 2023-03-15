@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -9,6 +10,7 @@ import {
   FaCamera,
   FaCashRegister,
 } from 'react-icons/fa';
+import Logo from '@/public/logo.svg';
 
 const Sidebar = () => {
   const router = useRouter();
@@ -57,7 +59,7 @@ const Sidebar = () => {
       <div className='flex flex-col justify-between h-full'>
         <div>
           <div className='flex flex-col items-center justify-center h-20'>
-            <h1>Rental</h1>
+            <Image src={Logo} />
           </div>
           <ul className='flex flex-col gap-2'>
             {navLink1.map((link) => (

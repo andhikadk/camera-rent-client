@@ -96,71 +96,66 @@ const TableUnit = () => {
         />
       </div>
       <table className='w-full text-sm text-left text-zinc-500 dark:text-zinc-400'>
-        <thead className='text-xs text-zinc-700 uppercase bg-white dark:bg-zinc-700 dark:text-zinc-400'>
+        <thead className='text-xs text-zinc-700 bg-white dark:bg-zinc-700 dark:text-zinc-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('no')}
+                className='flex uppercase items-center cursor-pointer'>
                 No Id
-                <a onClick={() => handleSort('no')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-3/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('nama')}
+                className='flex uppercase items-center cursor-pointer'>
                 Nama
-                <a onClick={() => handleSort('name')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('kode')}
+                className='flex uppercase items-center cursor-pointer'>
                 Kode
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('jenis')}
+                className='flex uppercase items-center cursor-pointer'>
                 Jenis
-                <a onClick={() => handleSort('totalTransaction')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('type')}
+                className='flex uppercase items-center cursor-pointer'>
                 Type
-                <a onClick={() => handleSort('totalAmount')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('posisi')}
+                className='flex uppercase items-center cursor-pointer'>
                 Posisi
-                <a onClick={() => handleSort('role')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('status')}
+                className='flex uppercase items-center cursor-pointer'>
                 Status
-                <a onClick={() => handleSort('status')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Action
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+              <div className='flex uppercase items-center'>Action</div>
             </th>
           </tr>
         </thead>

@@ -120,71 +120,66 @@ const TableTransaction = () => {
         />
       </div>
       <table className='w-full text-sm text-left text-zinc-500 dark:text-zinc-400'>
-        <thead className='text-xs text-zinc-700 uppercase bg-zinc-50 dark:bg-zinc-700 dark:text-zinc-400'>
+        <thead className='text-xs text-zinc-700 bg-white dark:bg-zinc-700 dark:text-zinc-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('id')}
+                className='flex uppercase items-center cursor-pointer'>
                 No
-                <a onClick={() => handleSort('no_invoice')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Nama Customer
-                <a onClick={() => handleSort('cust_id.name')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
-                PJ
-                <a onClick={() => handleSort('pj_unit_keluar')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+              <button
+                onClick={() => handleSort('name')}
+                className='flex uppercase items-center cursor-pointer'>
+                Nama Customer
+                <SortIcon />
+              </button>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <button
+                onClick={() => handleSort('phone')}
+                className='flex uppercase items-center cursor-pointer'>
+                Pj
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-3/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('totalTransaction')}
+                className='flex uppercase items-center cursor-pointer'>
                 Unit
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <button
+                onClick={() => handleSort('totalAmount')}
+                className='flex uppercase items-center cursor-pointer'>
                 Pengambilan
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <button
+                onClick={() => handleSort('role')}
+                className='flex uppercase items-center cursor-pointer'>
+                Pengembalian
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex items-center'>
-                Pengembalian
-                <a href='#'>
-                  <SortIcon />
-                </a>
-              </div>
-            </th>
-            <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
+              <button
+                onClick={() => handleSort('status')}
+                className='flex uppercase items-center cursor-pointer'>
                 Biaya
-                <a onClick={() => handleSort('total_biaya')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+                <SortIcon />
+              </button>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
-              <div className='flex items-center'>
-                Status
-                <a onClick={() => handleSort('status')} href='#'>
-                  <SortIcon />
-                </a>
-              </div>
+              <div className='flex uppercase items-center'>Status</div>
             </th>
           </tr>
         </thead>
@@ -202,9 +197,15 @@ const TableTransaction = () => {
               </th>
               <td className='px-6 py-2'>{d.pj_unit_keluar}</td>
               <td className='px-6 py-2'>
-                {d.unit.slice(0, 2).map((u, index) => (
-                  <div key={index}>{u}</div>
-                ))}
+                {d.unit
+                  .slice(0, 2)
+                  .map((u, index) =>
+                    d.unit.length > 1 ? (
+                      <div key={index}>{u},</div>
+                    ) : (
+                      <div key={index}>{u}</div>
+                    )
+                  )}
                 {d.unit.length > 4 && <div>...</div>}
               </td>
               <td className='px-6 py-2'>{d.pengambilan}</td>
