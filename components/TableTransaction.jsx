@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
 import Pagination from './Pagination';
+import Search from './common/Search';
 
 const SortIcon = () => {
   return (
@@ -22,6 +23,7 @@ const TableTransaction = () => {
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage] = useState(10);
+  const [query, setQuery] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -56,7 +58,21 @@ const TableTransaction = () => {
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const filteredUnits = data.filter((item) => {
+    if (query === '') {
+      return item;
+    } else if (
+      item.no_invoice.toString().toLowerCase().includes(query.toLowerCase()) ||
+      item.cust_id.name.toLowerCase().includes(query.toLowerCase()) ||
+      item.pj_unit_keluar.toLowerCase().includes(query.toLowerCase()) ||
+      item.pengambilan.toLowerCase().includes(query.toLowerCase()) ||
+      item.pengembalian.toLowerCase().includes(query.toLowerCase()) ||
+      item.total_biaya.toString().toLowerCase().includes(query.toLowerCase())
+    ) {
+      return item;
+    }
+  });
+  const currentItems = filteredUnits.slice(indexOfFirstItem, indexOfLastItem);
   const lastPage = Math.ceil(data.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -92,14 +108,17 @@ const TableTransaction = () => {
 
   return (
     <div className='overflow-x-auto'>
-      <Pagination
-        totalItem={data.length}
-        lastPage={lastPage}
-        paginate={paginate}
-        currentPage={currentPage}
-        indexOfFirstItem={indexOfFirstItem}
-        indexOfLastItem={indexOfLastItem}
-      />
+      <div className='flex flex-row items-center justify-between'>
+        <Search query={query} setQuery={setQuery} />
+        <Pagination
+          totalItem={data.length}
+          lastPage={lastPage}
+          paginate={paginate}
+          currentPage={currentPage}
+          indexOfFirstItem={indexOfFirstItem}
+          indexOfLastItem={indexOfLastItem}
+        />
+      </div>
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
           <tr>

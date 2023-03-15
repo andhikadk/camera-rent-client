@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Search = () => {
+const Search = ({ query, setQuery }) => {
   return (
     <>
       <label htmlFor='table-search' className='sr-only'>
         Search
       </label>
-      <div className='relative mt-1 hidden md:block'>
+      <div className='relative mt-1 hidden md:block border-md'>
         <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
           <svg
             className='w-5 h-5 text-gray-500 dark:text-gray-400'
@@ -21,9 +21,11 @@ const Search = () => {
           </svg>
         </div>
         <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           type='text'
           id='table-search'
-          className='block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg sm:w-96 w-full bg-gray-50 focus:ring-blue-200 focus:border-blue-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-200 dark:focus:border-blue-200'
+          className='block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg sm:w-96 w-full bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
           placeholder='Search for items'
         />
       </div>

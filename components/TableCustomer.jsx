@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
+import Search from './common/Search';
 import Pagination from './Pagination';
 
 const SortIcon = () => {
@@ -23,6 +24,7 @@ const TableCustomer = () => {
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage] = useState(10);
+  const [query, setQuery] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -78,7 +80,21 @@ const TableCustomer = () => {
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const filteredUnits = data.filter((item) => {
+    if (query === '') {
+      return item;
+    } else if (
+      item.no_id.toLowerCase().includes(query.toLowerCase()) ||
+      item.name.toLowerCase().includes(query.toLowerCase()) ||
+      item.phone.toLowerCase().includes(query.toLowerCase()) ||
+      item.role.toLowerCase().includes(query.toLowerCase()) ||
+      item.totalTransaction.toString().includes(query.toLowerCase()) ||
+      item.totalAmount.toString().includes(query.toLowerCase())
+    ) {
+      return item;
+    }
+  });
+  const currentItems = filteredUnits.slice(indexOfFirstItem, indexOfLastItem);
   const lastPage = Math.ceil(customers.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -102,14 +118,17 @@ const TableCustomer = () => {
 
   return (
     <div className='overflow-x-auto'>
-      <Pagination
-        totalItem={customers.length}
-        lastPage={lastPage}
-        paginate={paginate}
-        currentPage={currentPage}
-        indexOfFirstItem={indexOfFirstItem}
-        indexOfLastItem={indexOfLastItem}
-      />
+      <div className='flex flex-row items-center justify-between'>
+        <Search query={query} setQuery={setQuery} />
+        <Pagination
+          totalItem={customers.length}
+          lastPage={lastPage}
+          paginate={paginate}
+          currentPage={currentPage}
+          indexOfFirstItem={indexOfFirstItem}
+          indexOfLastItem={indexOfLastItem}
+        />
+      </div>
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead className='text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400'>
           <tr>

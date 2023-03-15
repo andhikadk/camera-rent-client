@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
+import Search from './common/Search';
 import Pagination from './Pagination';
 
 const SortIcon = () => {
@@ -22,6 +23,7 @@ const TableUnit = () => {
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage] = useState(10);
+  const [query, setQuery] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -44,7 +46,21 @@ const TableUnit = () => {
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = units.slice(indexOfFirstItem, indexOfLastItem);
+  const filteredUnits = units.filter((item) => {
+    if (query === '') {
+      return item;
+    } else if (
+      item.nama.toLowerCase().includes(query.toLowerCase()) ||
+      item.kode.toLowerCase().includes(query.toLowerCase()) ||
+      item.jenis.toLowerCase().includes(query.toLowerCase()) ||
+      item.type.toLowerCase().includes(query.toLowerCase()) ||
+      item.posisi.toLowerCase().includes(query.toLowerCase()) ||
+      item.status.toLowerCase().includes(query.toLowerCase())
+    ) {
+      return item;
+    }
+  });
+  const currentItems = filteredUnits.slice(indexOfFirstItem, indexOfLastItem);
   const lastPage = Math.ceil(units.length / itemPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -61,28 +77,31 @@ const TableUnit = () => {
       return 0;
     });
 
-    setCustomers(sortedData);
+    setUnits(sortedData);
     setSortColumn(column);
     setSortDirection(direction);
   };
 
   return (
     <div className='overflow-x-auto'>
-      <Pagination
-        totalItem={units.length}
-        lastPage={lastPage}
-        paginate={paginate}
-        currentPage={currentPage}
-        indexOfFirstItem={indexOfFirstItem}
-        indexOfLastItem={indexOfLastItem}
-      />
+      <div className='flex flex-row items-center justify-between'>
+        <Search query={query} setQuery={setQuery} />
+        <Pagination
+          totalItem={units.length}
+          lastPage={lastPage}
+          paginate={paginate}
+          currentPage={currentPage}
+          indexOfFirstItem={indexOfFirstItem}
+          indexOfLastItem={indexOfLastItem}
+        />
+      </div>
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead className='text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400'>
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <div className='flex items-center'>
                 No Id
-                <a onClick={() => handleSort('id')} href='#'>
+                <a onClick={() => handleSort('no')} href='#'>
                   <SortIcon />
                 </a>
               </div>

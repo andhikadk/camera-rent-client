@@ -38,7 +38,7 @@ const Pagination = ({
     <div
       className='flex items-center justify-between pt-4 mb-4'
       aria-label='Table navigation'>
-      <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
+      <div className='text-sm font-normal text-gray-500 dark:text-gray-400'>
         Showing{' '}
         <span className='font-semibold text-gray-900 dark:text-white'>
           {indexOfFirstItem + 1}
@@ -51,8 +51,8 @@ const Pagination = ({
         <span className='font-semibold text-gray-900 dark:text-white'>
           {totalItem}
         </span>{' '}
-      </span>
-      <ul className='inline-flex items-center -space-x-px'>
+      </div>
+      <ul className='inline-flex items-center -space-x-px ml-12'>
         <li>
           <a
             onClick={() =>
