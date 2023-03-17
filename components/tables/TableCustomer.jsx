@@ -126,7 +126,7 @@ const TableCustomer = () => {
                 <SortIcon />
               </button>
             </th>
-            <th scope='col' className='px-6 py-3 w-3/12'>
+            <th scope='col' className='px-6 py-3 w-2/12'>
               <button
                 onClick={() => handleSort('name')}
                 className='flex uppercase items-center cursor-pointer'>
@@ -142,19 +142,11 @@ const TableCustomer = () => {
                 <SortIcon />
               </button>
             </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
+            <th scope='col' className='px-6 py-3 w-1/12'>
               <button
                 onClick={() => handleSort('instagram')}
                 className='flex uppercase items-center cursor-pointer'>
                 Instagram
-                <SortIcon />
-              </button>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <button
-                onClick={() => handleSort('pj')}
-                className='flex uppercase items-center cursor-pointer'>
-                PJ
                 <SortIcon />
               </button>
             </th>
@@ -166,6 +158,22 @@ const TableCustomer = () => {
                 <SortIcon />
               </button>
             </th>
+            <th scope='col' className='px-6 py-3 w-3/12'>
+              <button
+                onClick={() => handleSort('address')}
+                className='flex uppercase items-center cursor-pointer'>
+                Address
+                <SortIcon />
+              </button>
+            </th>
+            <th scope='col' className='px-6 py-3 w-1/12'>
+              <button
+                onClick={() => handleSort('pj')}
+                className='flex uppercase items-center cursor-pointer'>
+                PJ
+                <SortIcon />
+              </button>
+            </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <button
                 onClick={() => handleSort('status')}
@@ -173,9 +181,6 @@ const TableCustomer = () => {
                 Status
                 <SortIcon />
               </button>
-            </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex uppercase items-center'>Action</div>
             </th>
           </tr>
         </thead>
@@ -193,8 +198,9 @@ const TableCustomer = () => {
               <td className='px-6 py-2'>{d.name}</td>
               <td className='px-6 py-2'>{d.phone}</td>
               <td className='px-6 py-2'>{d.instagram}</td>
-              <td className='px-6 py-2'>{d.pj}</td>
               <td className='px-6 py-2'>{d.type}</td>
+              <td className='px-6 py-2'>{d.address}</td>
+              <td className='px-6 py-2'>{d.pj}</td>
               <td className='px-6 py-2'>
                 {d.status === 'MEMBER' ? (
                   <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
@@ -205,16 +211,6 @@ const TableCustomer = () => {
                     {d.status}
                   </div>
                 )}
-              </td>
-              <td className='px-6 py-2'>
-                <div className='flex items-center space-x-4 text-sm'>
-                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue'>
-                    Edit
-                  </button>
-                  {/* <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
-                    Delete
-                  </button> */}
-                </div>
               </td>
             </tr>
           ))}

@@ -59,7 +59,7 @@ const Sidebar = () => {
       <div className='flex flex-col justify-between h-full'>
         <div>
           <div className='flex flex-col items-center justify-center h-20'>
-            <Image src={Logo} alt='Logo' as='script' priority />
+            <Image src={Logo} alt='Logo' />
           </div>
           <ul className='flex flex-col gap-2'>
             {navLink1.map((link) => (
