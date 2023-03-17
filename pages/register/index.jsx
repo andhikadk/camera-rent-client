@@ -60,7 +60,6 @@ const Register = () => {
             Name
           </label>
           <input
-            className='border border-gray-400 p-2 w-full rounded-md'
             type='text'
             id='name'
             value={name}
@@ -73,7 +72,6 @@ const Register = () => {
             Email
           </label>
           <input
-            className='border border-gray-400 p-2 w-full rounded-md'
             type='email'
             id='email'
             value={email}
@@ -88,7 +86,6 @@ const Register = () => {
             Password
           </label>
           <input
-            className='border border-gray-400 p-2 w-full rounded-md'
             type='password'
             id='password'
             value={password}
@@ -103,7 +100,6 @@ const Register = () => {
             Confirm Password
           </label>
           <input
-            className='border border-gray-400 p-2 w-full rounded-md'
             type='password'
             id='confPassword'
             value={confPassword}

@@ -28,38 +28,25 @@ const TableCustomer = () => {
   const router = useRouter();
 
   useEffect(() => {
-    getCustomers();
-    getTransactions();
+    getData();
   }, []);
 
-  const getCustomers = async () => {
+  const getData = async () => {
     try {
-      const response = await axios.get('customers');
-      setCustomers(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getTransactions = async () => {
-    try {
-      const response = await axios.get('transactions');
-      setTransactions(response.data);
+      const customersData = await axios.get('customers');
+      setCustomers(customersData.data);
+      const transactionsData = await axios.get('transactions');
+      setTransactions(transactionsData.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const data = customers.map((customer) => {
-    const transaction = transactions.filter(
-      (transaction) => transaction.cust_id.id == customer._id
-    );
-    const totalTransaction = transaction.length;
-    const totalAmount = transaction.reduce(
-      (acc, curr) => acc + curr.total_biaya,
-      0
-    );
-    // add field status which conatin "MEMBER" and "NON MEMBER" member when customer have transactions => 3
+    const totalTransaction = transactions.filter(
+      (transaction) => transaction.cust_id._id == customer._id
+    ).length;
+
     if (totalTransaction >= 3) {
       customer.status = 'MEMBER';
     } else {
@@ -69,7 +56,6 @@ const TableCustomer = () => {
     return {
       ...customer,
       totalTransaction,
-      totalAmount,
     };
   });
 
@@ -84,12 +70,12 @@ const TableCustomer = () => {
     if (query === '') {
       return item;
     } else if (
-      item.no_id.toLowerCase().includes(query.toLowerCase()) ||
+      item.id.toString().toLowerCase().includes(query.toLowerCase()) ||
       item.name.toLowerCase().includes(query.toLowerCase()) ||
       item.phone.toLowerCase().includes(query.toLowerCase()) ||
-      item.role.toLowerCase().includes(query.toLowerCase()) ||
-      item.totalTransaction.toString().includes(query.toLowerCase()) ||
-      item.totalAmount.toString().includes(query.toLowerCase())
+      item.type.toLowerCase().includes(query.toLowerCase()) ||
+      item.pj.toLowerCase().includes(query.toLowerCase()) ||
+      item.totalTransaction.toString().includes(query.toLowerCase())
     ) {
       return item;
     }
@@ -158,25 +144,25 @@ const TableCustomer = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <button
-                onClick={() => handleSort('totalTransaction')}
+                onClick={() => handleSort('instagram')}
                 className='flex uppercase items-center cursor-pointer'>
-                Total Rent
+                Instagram
                 <SortIcon />
               </button>
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <button
-                onClick={() => handleSort('totalAmount')}
+                onClick={() => handleSort('pj')}
                 className='flex uppercase items-center cursor-pointer'>
-                Rent Amount
+                PJ
                 <SortIcon />
               </button>
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <button
-                onClick={() => handleSort('role')}
+                onClick={() => handleSort('type')}
                 className='flex uppercase items-center cursor-pointer'>
-                Role
+                Type
                 <SortIcon />
               </button>
             </th>
@@ -202,13 +188,13 @@ const TableCustomer = () => {
               <th
                 scope='row'
                 className='px-6 py-2 font-medium text-zinc-900 whitespace-nowrap dark:text-white'>
-                {d.no_id}
+                {d.id}
               </th>
               <td className='px-6 py-2'>{d.name}</td>
               <td className='px-6 py-2'>{d.phone}</td>
-              <td className='px-6 py-2'>{d.totalTransaction}</td>
-              <td className='px-6 py-2'>{d.totalAmount}</td>
-              <td className='px-6 py-2'>{d.role}</td>
+              <td className='px-6 py-2'>{d.instagram}</td>
+              <td className='px-6 py-2'>{d.pj}</td>
+              <td className='px-6 py-2'>{d.type}</td>
               <td className='px-6 py-2'>
                 {d.status === 'MEMBER' ? (
                   <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>

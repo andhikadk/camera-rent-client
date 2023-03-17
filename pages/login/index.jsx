@@ -60,9 +60,8 @@ const Login = () => {
             Email
           </label>
           <input
-            className='border border-gray-400 p-2 w-full rounded-md'
-            type='text'
             id='email'
+            type='text'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -75,9 +74,8 @@ const Login = () => {
             Password
           </label>
           <input
-            className='border border-gray-400 p-2 w-full rounded-md'
-            type='password'
             id='password'
+            type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

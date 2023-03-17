@@ -1,28 +1,28 @@
 import Link from 'next/link';
-import { FaPlus } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import Layout from '@/components/Layout';
-import TableCustomer from '@/components/tables/TableCustomer';
 import Button from '@/components/common/Button';
+import AddCustomer from '@/components/forms/AddCustomer';
 
-const customers = () => {
+const add = () => {
   return (
     <Layout>
       <div className='flex flex-row justify-between'>
         <div className='w-full'>
-          <h1>Customers</h1>
+          <h1>Add Customer</h1>
         </div>
         <div className='flex justify-end w-full'>
-          <Link href='customers/add'>
+          <Link href='/customers'>
             <Button>
-              <FaPlus className='mr-3' />
-              Add Customer
+              <FaArrowLeft className='mr-3' />
+              Back
             </Button>
           </Link>
         </div>
       </div>
-      <TableCustomer />
+      <AddCustomer />
     </Layout>
   );
 };
 
-export default customers;
+export default add;
