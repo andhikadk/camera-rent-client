@@ -1,28 +1,28 @@
 import Link from 'next/link';
-import { FaPlus } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import Layout from '@/components/Layout';
-import TableUnit from '@/components/tables/TableUnit';
 import Button from '@/components/common/Button';
+import AddUnit from '@/components/forms/AddUnit';
 
-const units = () => {
+const add = () => {
   return (
     <Layout>
       <div className='flex flex-row justify-between'>
         <div className='w-full'>
-          <h1>Units</h1>
+          <h1>Add Unit</h1>
         </div>
         <div className='flex justify-end w-full'>
-          <Link href='units/add'>
+          <Link href='/units'>
             <Button>
-              <FaPlus className='mr-3' />
-              Add Unit
+              <FaArrowLeft className='mr-3' />
+              Back
             </Button>
           </Link>
         </div>
       </div>
-      <TableUnit />
+      <AddUnit />
     </Layout>
   );
 };
 
-export default units;
+export default add;

@@ -154,9 +154,6 @@ const TableUnit = () => {
                 <SortIcon />
               </button>
             </th>
-            <th scope='col' className='px-6 py-3 w-2/12'>
-              <div className='flex uppercase items-center'>Action</div>
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -165,40 +162,30 @@ const TableUnit = () => {
               onClick={(e) => getDetails(e, d._id)}
               className='bg-zinc-50 border-b dark:text-slate-300 dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 cursor-pointer'
               key={d._id}>
+              <td className='px-6 py-2'>{d.id}</td>
               <th
                 scope='row'
                 className='px-6 py-2 font-medium text-zinc-900 whitespace-nowrap dark:text-white'>
-                {d.no}
+                {d.name}
               </th>
-              <td className='px-6 py-2'>{d.nama}</td>
-              <td className='px-6 py-2'>{d.kode}</td>
-              <td className='px-6 py-2'>{d.jenis}</td>
+              <td className='px-6 py-2'>{d.code}</td>
+              <td className='px-6 py-2'>{d.category}</td>
               <td className='px-6 py-2'>{d.type}</td>
-              <td className='px-6 py-2'>{d.posisi}</td>
+              <td className='px-6 py-2'>{d.position}</td>
               <td className='px-6 py-2'>
-                {d.status === 'Normal' ? (
-                  <div className='w-fit flex justify-center bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
+                {d.status === 'normal' ? (
+                  <div className='w-fit flex justify-center uppercase bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>
                     {d.status}
                   </div>
-                ) : d.status === 'Bermasalah' ? (
-                  <div className='w-fit flex justify-center bg-red-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300'>
+                ) : d.status === 'problem' ? (
+                  <div className='w-fit flex justify-center uppercase bg-red-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-200'>
                     {d.status}
                   </div>
                 ) : (
-                  <div className='w-fit flex justify-center bg-yellow-400 text-black text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
+                  <div className='w-fit flex justify-center uppercase bg-yellow-400 text-black text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300'>
                     {d.status}
                   </div>
                 )}
-              </td>
-              <td className='px-6 py-2'>
-                <div className='flex items-center space-x-4 text-sm'>
-                  <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue'>
-                    Edit
-                  </button>
-                  {/* <button className='flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue'>
-                    Delete
-                  </button> */}
-                </div>
               </td>
             </tr>
           ))}

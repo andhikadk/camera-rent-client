@@ -1,7 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Button from '../common/Button';
 import axios from '../../utils/axios';
 import { useRouter } from 'next/router';
+
+const types = [
+  { value: 'general', label: 'General' },
+  { value: 'student', label: 'Student' },
+];
 
 const AddCustomer = () => {
   const [name, setName] = useState('');
@@ -39,7 +44,6 @@ const AddCustomer = () => {
       router.push('/customers');
     } catch (error) {
       setError(error.response.data.message);
-      console.log(error.response.data);
     }
   };
 
@@ -79,9 +83,14 @@ const AddCustomer = () => {
                         id='type'
                         value={type}
                         onChange={(e) => setType(e.target.value)}>
-                        <option hidden> -- Choose type -- </option>
-                        <option value='general'>General</option>
-                        <option value='student'>Student</option>
+                        <option value='' hidden>
+                          Select type
+                        </option>
+                        {types.map((type) => (
+                          <option key={type.value} value={type.value}>
+                            {type.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
 

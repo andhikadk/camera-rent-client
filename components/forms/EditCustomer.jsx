@@ -29,7 +29,6 @@ const EditCustomer = () => {
     try {
       const response = await axios.get(`/customers/${id}`);
       const customer = response.data;
-      console.log(customer);
       setName(customer.name);
       setType(customer.type);
       setPhone(customer.phone);
@@ -37,7 +36,11 @@ const EditCustomer = () => {
       setAddress(customer.address);
       setDistrict(customer.district);
       setSubDistrict(customer.sub_district);
-    } catch (error) {}
+    } catch (error) {
+      if (error.response.status === 404) {
+        router.push('/customers');
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -65,7 +68,6 @@ const EditCustomer = () => {
       router.push('/customers');
     } catch (error) {
       setError(error.response.data.message);
-      console.log(error.response.data);
     }
   };
 

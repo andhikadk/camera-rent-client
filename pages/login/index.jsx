@@ -53,10 +53,12 @@ const Login = () => {
     <div className='flex justify-center items-center h-screen'>
       <form
         onSubmit={handleSubmit}
-        className='bg-white p-8 rounded-lg w-80 md:w-96'>
-        <h2 className='text-2xl font-medium mb-5 text-center'>Login</h2>
+        className='bg-white dark:bg-zinc-800 p-8 rounded-lg w-80 md:w-96'>
+        <h1 className='text-center'>Login</h1>
         <div className='mb-5'>
-          <label className='block text-gray-700 font-bold mb-2' htmlFor='email'>
+          <label
+            className='block text-zinc-700 dark:text-zinc-200 font-bold mb-2'
+            htmlFor='email'>
             Email
           </label>
           <input
@@ -69,7 +71,7 @@ const Login = () => {
         </div>
         <div className='mb-5'>
           <label
-            className='block text-gray-700 font-bold mb-2'
+            className='block text-zinc-700 dark:text-zinc-200 font-bold mb-2'
             htmlFor='password'>
             Password
           </label>
@@ -84,7 +86,7 @@ const Login = () => {
         <button className='bg-blue-500 text-white py-2 px-4 w-full rounded-md hover:bg-blue-700 transition-colors duration-300'>
           Login
         </button>
-        <p className='text-center mt-3'>
+        <p className='text-center mt-3 dark:text-zinc-200'>
           Don't have an account?{' '}
           <Link href='/register' className='text-blue-500'>
             Register

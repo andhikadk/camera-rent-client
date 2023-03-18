@@ -190,12 +190,12 @@ const TableCustomer = () => {
               onClick={(e) => getDetails(e, d._id)}
               className='bg-zinc-50 border-b dark:text-slate-300 dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 cursor-pointer'
               key={d._id}>
+              <td className='px-6 py-2'>{d.id}</td>
               <th
                 scope='row'
                 className='px-6 py-2 font-medium text-zinc-900 whitespace-nowrap dark:text-white'>
-                {d.id}
+                {d.name}
               </th>
-              <td className='px-6 py-2'>{d.name}</td>
               <td className='px-6 py-2'>{d.phone}</td>
               <td className='px-6 py-2'>{d.instagram}</td>
               <td className='px-6 py-2'>{d.type}</td>
