@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import Sidebar from './Sidebar';
-import Topbar from './Topbar';
+import Sidebar from './navbar/Sidebar';
+import Topbar from './navbar/Topbar';
 
 const Layout = ({ children }) => {
+  const [name, SetName] = React.useState('');
+
   return (
     <>
       <Head>

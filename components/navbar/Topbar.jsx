@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Search from './common/Search';
 import { useRouter } from 'next/router';
-import axios from '../utils/axios';
+import axios from '../../utils/axios';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { AiOutlineMenu } from 'react-icons/ai';
 

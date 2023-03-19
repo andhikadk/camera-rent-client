@@ -49,8 +49,8 @@ const data = {
         15000, 20000, 5000, 5000, 20000, 30000, 10000, 15000, 20000, 30000,
         50000, 25000,
       ],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderColor: 'rgb(59, 130, 246)',
+      backgroundColor: 'rgba(59, 130, 246, 0.5)',
     },
   ],
 };

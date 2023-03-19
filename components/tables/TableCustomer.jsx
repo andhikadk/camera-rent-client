@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
 import Pagination from '../common/Pagination';
 import Search from '../common/Search';
+import ModalCustomer from '../modals/ModalCustomer';
 
 const SortIcon = () => {
   return (
@@ -25,7 +25,8 @@ const TableCustomer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage] = useState(10);
   const [query, setQuery] = useState('');
-  const router = useRouter();
+  const [isModal, setIsModal] = useState(false);
+  const [details, setDetails] = useState({});
 
   useEffect(() => {
     getData();
@@ -61,7 +62,9 @@ const TableCustomer = () => {
 
   const getDetails = (e, id) => {
     e.preventDefault();
-    router.push(`/customers/${id}`);
+    setIsModal(true);
+    const detail = data.filter((item) => item._id === id);
+    setDetails(detail[0]);
   };
 
   const indexOfLastItem = currentPage * itemPerPage;
@@ -216,6 +219,13 @@ const TableCustomer = () => {
           ))}
         </tbody>
       </table>
+      {isModal && (
+        <ModalCustomer
+          isModal={isModal}
+          setIsModal={setIsModal}
+          details={details}
+        />
+      )}
     </div>
   );
 };
