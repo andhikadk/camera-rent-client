@@ -125,7 +125,7 @@ const TableCustomer = () => {
               <button
                 onClick={() => handleSort('id')}
                 className='flex uppercase items-center cursor-pointer'>
-                No Id
+                Id
                 <SortIcon />
               </button>
             </th>

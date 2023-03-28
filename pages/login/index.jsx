@@ -53,7 +53,7 @@ const Login = () => {
     <div className='flex justify-center items-center h-screen'>
       <form
         onSubmit={handleSubmit}
-        className='bg-white dark:bg-zinc-800 p-8 rounded-lg w-80 md:w-96'>
+        className='bg-white dark:bg-zinc-700 p-8 rounded-lg w-80 md:w-96'>
         <h1 className='text-center'>Login</h1>
         <div className='mb-5'>
           <label

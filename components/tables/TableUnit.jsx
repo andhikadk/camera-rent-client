@@ -22,7 +22,7 @@ const TableUnit = () => {
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage] = useState(10);
+  const [itemPerPage] = useState(15);
   const [query, setQuery] = useState('');
   const router = useRouter();
 
@@ -50,11 +50,11 @@ const TableUnit = () => {
     if (query === '') {
       return item;
     } else if (
-      item.nama.toLowerCase().includes(query.toLowerCase()) ||
-      item.kode.toLowerCase().includes(query.toLowerCase()) ||
-      item.jenis.toLowerCase().includes(query.toLowerCase()) ||
+      item.name.toLowerCase().includes(query.toLowerCase()) ||
+      item.code.toLowerCase().includes(query.toLowerCase()) ||
+      item.category.toLowerCase().includes(query.toLowerCase()) ||
       item.type.toLowerCase().includes(query.toLowerCase()) ||
-      item.posisi.toLowerCase().includes(query.toLowerCase()) ||
+      item.location.toLowerCase().includes(query.toLowerCase()) ||
       item.status.toLowerCase().includes(query.toLowerCase())
     ) {
       return item;
@@ -100,15 +100,15 @@ const TableUnit = () => {
           <tr>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <button
-                onClick={() => handleSort('no')}
+                onClick={() => handleSort('id')}
                 className='flex uppercase items-center cursor-pointer'>
-                No Id
+                Id
                 <SortIcon />
               </button>
             </th>
             <th scope='col' className='px-6 py-3 w-3/12'>
               <button
-                onClick={() => handleSort('nama')}
+                onClick={() => handleSort('name')}
                 className='flex uppercase items-center cursor-pointer'>
                 Nama
                 <SortIcon />
@@ -116,7 +116,7 @@ const TableUnit = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <button
-                onClick={() => handleSort('kode')}
+                onClick={() => handleSort('code')}
                 className='flex uppercase items-center cursor-pointer'>
                 Kode
                 <SortIcon />
@@ -124,9 +124,9 @@ const TableUnit = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-2/12'>
               <button
-                onClick={() => handleSort('jenis')}
+                onClick={() => handleSort('category')}
                 className='flex uppercase items-center cursor-pointer'>
-                Jenis
+                Kategori
                 <SortIcon />
               </button>
             </th>
@@ -140,9 +140,9 @@ const TableUnit = () => {
             </th>
             <th scope='col' className='px-6 py-3 w-1/12'>
               <button
-                onClick={() => handleSort('posisi')}
+                onClick={() => handleSort('location')}
                 className='flex uppercase items-center cursor-pointer'>
-                Posisi
+                Location
                 <SortIcon />
               </button>
             </th>
@@ -171,7 +171,7 @@ const TableUnit = () => {
               <td className='px-6 py-2'>{d.code}</td>
               <td className='px-6 py-2'>{d.category}</td>
               <td className='px-6 py-2'>{d.type}</td>
-              <td className='px-6 py-2'>{d.position}</td>
+              <td className='px-6 py-2'>{d.location}</td>
               <td className='px-6 py-2'>
                 {d.status === 'normal' ? (
                   <div className='w-fit flex justify-center uppercase bg-green-700 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300'>

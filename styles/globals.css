@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body {
   @apply bg-zinc-200 dark:bg-zinc-900 scrollbar-thin scrollbar-thumb-zinc-50 scrollbar-track-zinc-300 dark:scrollbar-thumb-zinc-700 dark:scrollbar-track-zinc-900;
 }
@@ -36,7 +28,7 @@ nav ul li {
 
 input,
 select {
-  @apply bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  @apply bg-zinc-100 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-600 dark:border-zinc-500 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
 }
 
 #button {

@@ -1,6 +1,10 @@
 import React from 'react';
+import Button from '../common/Button';
+import { useRouter } from 'next/router';
 
 const ModalCustomer = ({ setIsModal, details }) => {
+  const router = useRouter();
+
   const customerDetail = [
     { label: 'ID', value: details.id },
     { label: 'Nama', value: details.name },
@@ -15,29 +19,36 @@ const ModalCustomer = ({ setIsModal, details }) => {
     { label: 'Status', value: details.status },
   ];
 
+  const handleEdit = () => {
+    router.push(`/customers/${details._id}/`);
+  };
+
   return (
     <>
       <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center'>
         <div className='bg-zinc-50 dark:bg-zinc-700 min-w-[32rem] rounded-lg p-8 shadow-lg z-50'>
           <div className='flex justify-between items-center'>
             <h1 className='text-xl font-bold'>Customer Details</h1>
-            <button
-              onClick={() => setIsModal(false)}
-              className='text-zinc-900 dark:text-zinc-200'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            </button>
+            <div className='flex'>
+              <Button toggle={handleEdit}>Edit</Button>
+              <button
+                onClick={() => setIsModal(false)}
+                className='text-zinc-900 dark:text-zinc-200 ml-4'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-6 w-6'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
           <div className='mt-4 text-zinc-900 dark:text-zinc-100 text-start'>
             <table className='table-auto w-full'>

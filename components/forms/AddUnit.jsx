@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CreatableSelect from 'react-select/creatable';
 import Button from '../common/Button';
 import axios from '../../utils/axios';
 import { useRouter } from 'next/router';
@@ -63,14 +64,14 @@ const AddUnit = () => {
                         className='block mb-2 text-sm font-medium text-zinc-900 dark:text-white'>
                         Category
                       </label>
-                      <select
+                      <input
                         id='category'
+                        type='text'
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}>
-                        <option hidden> -- Choose category -- </option>
-                        <option value='camera'>Camera</option>
-                        <option value='iphone'>Iphone</option>
-                      </select>
+                        onChange={(e) => setType(e.target.value)}
+                        placeholder='Camera'
+                        required
+                      />
                     </div>
 
                     <div>

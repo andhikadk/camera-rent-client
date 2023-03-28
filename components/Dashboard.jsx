@@ -8,8 +8,10 @@ import {
   FaClock,
   FaShoppingCart,
 } from 'react-icons/fa';
-import SalesChart from './SalesChart';
 import axios from '../utils/axios';
+import SalesChartDay from './SalesChartDay';
+import TypeCustomer from './TypeCustomer';
+import SalesChart from './SalesChart';
 
 const Dashboard = () => {
   const [custNumber, setCustNumber] = useState([]);
@@ -84,7 +86,7 @@ const Dashboard = () => {
       </div>
       <div className='flex flex-row flex-wrap lg:flex-nowrap mb-4'>
         <div className='w-full lg:w-2/3 lg:mr-4 mb-4 lg:mb-0'>
-          <SalesChart />
+          <SalesChartDay />
         </div>
         <div className='w-full lg:w-1/3'>
           <TopCustomer />
@@ -95,7 +97,7 @@ const Dashboard = () => {
           <SalesChart />
         </div>
         <div className='w-full lg:w-1/3'>
-          <TopCustomer />
+          <TypeCustomer />
         </div>
       </div>
     </Layout>

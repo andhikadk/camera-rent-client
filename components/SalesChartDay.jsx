@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from '../utils/axios';
-import MonthChart from './common/MonthChart';
+import DayChart from './common/DayChart';
 
-const SalesChart = () => {
+const SalesChartDay = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const SalesChart = () => {
 
   const getTransactions = async () => {
     try {
-      const response = await axios.get('transactions/sales');
+      const response = await axios.get('transactions/sales/day');
       setTransactions(response.data);
     } catch (error) {
       console.log(error);
@@ -27,14 +27,14 @@ const SalesChart = () => {
         <a
           href='#'
           className='text-sm text-end font-medium text-blue-600 hover:underline dark:text-blue-500'>
-          View all
+          View All
         </a>
       </div>
       <div className='mt-8'>
-        <MonthChart data={transactions} />
+        <DayChart data={transactions} />
       </div>
     </div>
   );
 };
 
-export default SalesChart;
+export default SalesChartDay;
